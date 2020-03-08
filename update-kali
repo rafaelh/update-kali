@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
+
 import os
 import apt
 import subprocess
 import sys
 from updateactions import *
 from config import *
-
 
 def main():
     # Set variables
@@ -17,21 +17,25 @@ def main():
     # Update and upgrade apt packages
     update_packages()
 
-    print_green("Installing missing packages")
+    # Install additional packages
+    print_bold_green("Checking installed packages")
     for package in packages_to_install:
         package_install(package, cache)
 
+    # Install python modules
     installed_pip_packages = [r.decode().split('==')[0] for r in \
-        subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()] # must be post python3-pip install
+        subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
 
-    print_green("Creating directory structure")
+    # Create and remove specified directories
+    print_bold_green("Creating directory structure")
     create_directory(personal_repo_directory)
     create_directory(external_repo_directory)
     for directory in directories_to_remove:
         remove_directory(directory)
 
-    print_green("Syncing git repositories")
+    # Sync git repositories
+    print_bold_green("Syncing git repositories")
     git_sync('git@github.com:rafaelh/dotfiles.git', home_dir + '/dotfiles')
     git_sync('git@github.com:rafaelh/security.git', personal_repo_directory + '/security')
     git_sync('git@github.com:rafaelh/notes.git', personal_repo_directory + '/notes')
@@ -39,21 +43,27 @@ def main():
     git_sync('https://github.com/SecureAuthCorp/impacket', external_repo_directory + '/impacket')
     git_sync('https://github.com/swisskyrepo/PayloadsAllTheThings', external_repo_directory + '/payloadsallthethings')
 
-    print_green("Status of optional services")
+    # Run *.sh and *.py files in the /scripts directory
+    run_scripts()
+
+    # Show status of optional systemd services
+    print_bold_green("Status of optional services")
     systemd_services = ['sshd', 'postgresql']
     for system in systemd_services:
         if check_service_status(system) == False:
-            print_yellow(system + " is active")
+            print_green(system + " is active")
         else:
             print_red(system + " is inactive")
-
 
 
 if __name__ == '__main__':
     main()
 
+
 '''
 TODO:
+make sudo invocation nicer
+
 * Install vscode and sync settings
 * Install Typora and sync settings
 
@@ -62,11 +72,6 @@ sudo apt remove -y chromium
 systemctl enable postresql
 system start postgresql
 
-Add loguru
-make the output prettier in the console
-
 start making it generically useful
-
-
 
 '''

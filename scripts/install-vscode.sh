@@ -19,4 +19,3 @@ then
 else 
     echo -ne $GREY">>> "$ENDCOLOR; echo "Package 'code' already installed"
 fi
-

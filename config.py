@@ -15,3 +15,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop',
 
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint']
+
+# Last of all, take a look in the /scripts directory. Every script ending in .sh or .py will be run, provided it's
+# executable. For example, the current scripts install VS Code and Typora. Any script that goes in this directory 
+# should be written so it can run multiple times without causing problems.
