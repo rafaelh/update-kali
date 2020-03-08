@@ -55,6 +55,8 @@ def main():
         else:
             print_red(system + " is inactive")
 
+    print_grey("All done. Go break stuff.")
+
 
 if __name__ == '__main__':
     main()
