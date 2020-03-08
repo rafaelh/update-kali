@@ -66,10 +66,9 @@ if __name__ == '__main__':
 TODO:
 make sudo invocation nicer
 
-* Install vscode and sync settings
-* Install Typora and sync settings
-
 sudo apt remove -y chromium
+
+move git repos to config file
 
 systemctl enable postresql
 system start postgresql
