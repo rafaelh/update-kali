@@ -63,8 +63,8 @@ systemctl enable postresql
 system start postgresql
 
 Add loguru
-move to separate repo?
-load variables from a file
+make the output prettier in the console
+
 start making it generically useful
 
 
