@@ -20,7 +20,8 @@ pip_packages = ['pipenv', 'pylint']
 # These git  repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
-                            'https://github.com/swisskyrepo/PayloadsAllTheThings']
+                            'https://github.com/swisskyrepo/PayloadsAllTheThings',
+                            'https://github.com/payloadbox/xss-payload-list']
 
 # Last of all, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
 # provided it's # executable. For example, the current scripts install VS Code and Typora. Any 
