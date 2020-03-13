@@ -44,6 +44,7 @@ def main():
     git_sync('https://github.com/swisskyrepo/PayloadsAllTheThings', external_repo_directory + '/payloadsallthethings')
 
     # Run *.sh and *.py files in the /scripts directory
+    print_bold_green("Running scripts")
     run_scripts()
 
     # Show status of optional systemd services
@@ -55,7 +56,7 @@ def main():
         else:
             print_red(system + " is inactive")
 
-    print_grey("All done. Go break stuff.")
+    print("\nAll done. Go break stuff.")
 
 
 if __name__ == '__main__':
@@ -65,14 +66,12 @@ if __name__ == '__main__':
 '''
 TODO:
 make sudo invocation nicer
+remove specific packages
 
 sudo apt remove -y chromium
 
 move git repos to config file
 
-systemctl enable postresql
-system start postgresql
 
-start making it generically useful
 
 '''
