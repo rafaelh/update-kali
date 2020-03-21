@@ -10,14 +10,17 @@ external_repo_dir = '/z'
 # These directories will be removed from your home directory
 directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates', 'Videos']
 
-# These packages will be installed from APT. 
+# These kali packages will be installed
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster',
                        'exif', 'hexedit', 'python3-pip', 'python3-venv']
+
+# These kali packages will be removed
+packages_to_remove = ['chromium']
 
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint']
 
-# These git repositories will be synced to the 'external repo' directory.
+# These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',

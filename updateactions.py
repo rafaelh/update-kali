@@ -41,7 +41,7 @@ def check_service_status(service):
     status = os.system("systemctl is-active --quiet " + service)
     return status
 
-def package_install(package, apt_cache):
+def install_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
     if apt_cache[package].is_installed:
         print_grey("Package '" + package + "' already installed")
@@ -49,6 +49,15 @@ def package_install(package, apt_cache):
         print_red("\nInstalling " + package)
         cmdstring = "sudo apt install -y " + package
         if package == "pip": cmdstring += " && sudo pip3 install --upgrade pip"
+        os.system(cmdstring)
+
+def remove_package(package, apt_cache):
+    """ Installs a package from apt or lets you know if its present """
+    if not apt_cache[package].is_installed:
+        print_grey("Package '" + package + "' already removed")
+    else:
+        print_red("\nRemoving " + package)
+        cmdstring = "sudo apt remove -y " + package
         os.system(cmdstring)
 
 def pip_package_install(pip_packages, installed_pip_packages):

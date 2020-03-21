@@ -11,7 +11,7 @@ I find that I need to keep a lot of Kali linux installations up to date, and I l
 The default config can be found in config.py. You should updated it to match what you want, otherwise you'll have my preferences used. This script will:
 
 * Perform a general package update
-* Install and remove [TODO] specified packages
+* Install and remove specified packages
 * Install specified python modules
 * Set up some standardized directories
 * Run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem.

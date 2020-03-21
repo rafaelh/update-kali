@@ -16,14 +16,16 @@ def main():
     # Get sudo privileges
     if elevate_privileges(): sys.exit(1)
 
-    # Update and upgrade apt packages
+    # Update and upgrade kali packages
     update_packages()
 
-    # Install additional packages
+    # Install additional kali packages
     print_bold_green("Checking installed packages")
     apt_cache = apt.Cache()
     for package in packages_to_install:
-        package_install(package, apt_cache)
+        install_package(package, apt_cache)
+    for package in packages_to_remove:
+        remove_package(package, apt_cache)
 
     # Install python modules
     installed_pip_packages = [r.decode().split('==')[0] for r in \
@@ -66,8 +68,6 @@ if __name__ == '__main__':
 
 '''
 TODO:
-remove specific packages: sudo apt remove -y chromium
-
 pip install impacket if it exists
 
 '''
