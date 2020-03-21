@@ -24,6 +24,10 @@ def print_red(message):
     """ Prints a message to the console prefixed with a red '>>>' """
     print("\033[0;31;40m>>> \033[0;37;40m" + message + "\033[0;37;0m")
 
+def elevate_privileges():
+    status = os.system("sudo date")
+    return status
+
 def update_packages():
     """ Do a general update of the system packages """
     print_bold_green("General Update")
@@ -71,15 +75,15 @@ def remove_directory(directory):
         cmdstring = "rmdir " + directory
         os.system(cmdstring)
 
-def git_sync(gitrepo, directory):
-    if os.path.exists(directory):
-        print_yellow("Syncing " + directory)
-        cmdstring = "git -C " + directory + " pull origin master"
+def sync_git_repo(gitrepo, repo_collection_dir):
+    repo_name = gitrepo.split("/")[-1].lower()
+    if os.path.exists(repo_collection_dir + '/' + repo_name):
+        print_yellow("Syncing " + repo_name)
+        cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull origin master"
         os.system(cmdstring)
     else:
-        print_red("Cloning " + directory)
-        cmdstring = "git clone " + gitrepo + " " + directory
-        if directory == '/impacket': cmdstring += " && pip install " + os.getenv("HOME") + '/z/impacket'
+        print_red("Cloning " + repo_name)
+        cmdstring = "git clone " + gitrepo + ' ' + repo_collection_dir + '/' + repo_name
         os.system(cmdstring)
 
 def run_scripts():

@@ -14,6 +14,9 @@ def main():
     personal_repo_directory = home_dir + personal_repo_dir
     external_repo_directory = home_dir + external_repo_dir
 
+    # Get sudo privileges
+    if elevate_privileges(): sys.exit(1)
+
     # Update and upgrade apt packages
     update_packages()
 
@@ -36,12 +39,10 @@ def main():
 
     # Sync git repositories
     print_bold_green("Syncing git repositories")
-    git_sync('git@github.com:rafaelh/dotfiles.git', home_dir + '/dotfiles')
-    git_sync('git@github.com:rafaelh/security.git', personal_repo_directory + '/security')
-    git_sync('git@github.com:rafaelh/notes.git', personal_repo_directory + '/notes')
-    git_sync('https://github.com/danielmiessler/SecLists', external_repo_directory + '/seclists')
-    git_sync('https://github.com/SecureAuthCorp/impacket', external_repo_directory + '/impacket')
-    git_sync('https://github.com/swisskyrepo/PayloadsAllTheThings', external_repo_directory + '/payloadsallthethings')
+    for repo in personal_repositories_to_sync:
+        sync_git_repo(repo.replace(".git", ""), personal_repo_directory)
+    for repo in ext_repositories_to_sync:
+        sync_git_repo(repo, external_repo_directory)
 
     # Run *.sh and *.py files in the /scripts directory
     print_bold_green("Running scripts")
@@ -56,7 +57,7 @@ def main():
         else:
             print_red(system + " is inactive")
 
-    print("\nAll done. Go break stuff.")
+    print("\nAll done. Go break stuff.\n")
 
 
 if __name__ == '__main__':
@@ -65,13 +66,8 @@ if __name__ == '__main__':
 
 '''
 TODO:
-make sudo invocation nicer
-remove specific packages
+remove specific packages: sudo apt remove -y chromium
 
-sudo apt remove -y chromium
-
-move git repos to config file
-
-
+pip install impacket if it exists
 
 '''

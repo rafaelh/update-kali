@@ -17,13 +17,18 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint']
 
-# These git  repositories will be synced to the 'external repo' directory
+# These git repositories will be synced to the 'external repo' directory.
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
                             'https://github.com/payloadbox/xss-payload-list']
 
+# These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
+# from each string.
+personal_repositories_to_sync = ['git@github.com:rafaelh/security.git',
+                                 'git@github.com:rafaelh/notes.git']
+
 # Last of all, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
-# provided it's # executable. For example, the current scripts install VS Code and Typora. Any 
-# script that goes in this directory should be written so it can run multiple times without causing 
-# problems.
+# provided it's # executable. For example, the current scripts install VS Code, Google Chrome and 
+# Typora. Any script that goes in this directory should be written so it can run multiple times 
+# without causing problems.
