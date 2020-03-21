@@ -25,6 +25,7 @@ def print_red(message):
     print("\033[0;31;40m>>> \033[0;37;40m" + message + "\033[0;37;0m")
 
 def elevate_privileges():
+    """ Gets sudo privileges and returns the current date """
     status = os.system("sudo date")
     return status
 
@@ -40,8 +41,9 @@ def check_service_status(service):
     status = os.system("systemctl is-active --quiet " + service)
     return status
 
-def package_install(package, cache):
-    if cache[package].is_installed:
+def package_install(package, apt_cache):
+    """ Installs a package from apt or lets you know if its present """
+    if apt_cache[package].is_installed:
         print_grey("Package '" + package + "' already installed")
     else:
         print_red("\nInstalling " + package)
