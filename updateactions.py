@@ -69,6 +69,15 @@ def pip_package_install(pip_packages, installed_pip_packages):
             cmdstring = "sudo pip3 install --upgrade " + package
             os.system(cmdstring)
 
+def install_golang_module(module):
+    modulename = module.split("/")[-1].lower()
+    if not os.path.exists("/opt/" + modulename):
+        print_red("Installing go module " + modulename)
+        cmdstring = "export GOPATH=/opt/" + modulename + "; sudo go get -u " + module
+        os.system(cmdstring)
+        cmdstring = "sudo ln -s /opt/" + modulename + " " + "/usr/local/bin/" + modulename
+        os.system(cmdstring)
+
 def create_directory(directory):
     ''' Checks if the specified directory exists, and creates it if not '''
     if os.path.exists(directory):

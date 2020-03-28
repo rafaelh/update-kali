@@ -20,6 +20,9 @@ packages_to_remove = ['chromium']
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint']
 
+# These python tools will be installed globally
+golang_modules_to_install = ['github.com/tomnomnom/assetfinder']
+
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
