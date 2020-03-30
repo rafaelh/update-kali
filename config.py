@@ -20,7 +20,12 @@ packages_to_remove = ['chromium']
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint']
 
-# These python tools will be installed globally
+# These go tools will be installed globally. You will need to have the following settings in your
+# .bashrc already:
+# 
+# export GOROOT=/usr/lib/go
+# export GOPATH=$HOME/go
+# export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 golang_modules_to_install = ['github.com/tomnomnom/assetfinder']
 
 # These git repositories will be synced to the 'external repo' directory

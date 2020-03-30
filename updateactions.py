@@ -70,13 +70,15 @@ def pip_package_install(pip_packages, installed_pip_packages):
             os.system(cmdstring)
 
 def install_golang_module(module):
+    ''' Install the specified Golang module '''
     modulename = module.split("/")[-1].lower()
     if not os.path.exists("/opt/" + modulename):
         print_red("Installing go module " + modulename)
-        cmdstring = "export GOPATH=/opt/" + modulename + "; sudo go get -u " + module
-        os.system(cmdstring)
-        cmdstring = "sudo ln -s /opt/" + modulename + " " + "/usr/local/bin/" + modulename
-        os.system(cmdstring)
+        cmdseries = ["export GOPATH=/opt/" + modulename,
+                     "sudo -E go get -u " + module,
+                     "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" + modulename]
+        for cmdstring in cmdseries:
+            os.system(cmdstring)
 
 def create_directory(directory):
     ''' Checks if the specified directory exists, and creates it if not '''
@@ -96,6 +98,7 @@ def remove_directory(directory):
         os.system(cmdstring)
 
 def sync_git_repo(gitrepo, repo_collection_dir):
+    ''' Sync the specified git repository '''
     repo_name = gitrepo.split("/")[-1].lower()
     if os.path.exists(repo_collection_dir + '/' + repo_name):
         print_yellow("Syncing " + repo_name)
@@ -107,7 +110,7 @@ def sync_git_repo(gitrepo, repo_collection_dir):
         os.system(cmdstring)
 
 def run_scripts():
-    """ Run each .sh or .py file in the scripts directory """
+    ''' Run each .sh or .py file in the scripts directory '''
     script_directory = os.path.dirname(os.path.realpath(__file__)) + '/scripts'
 
     if os.path.exists(script_directory):
