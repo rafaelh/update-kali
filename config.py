@@ -18,7 +18,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
 packages_to_remove = ['chromium']
 
 # These python packages will be installed globally
-pip_packages = ['pipenv', 'pylint']
+pip_packages = ['pipenv', 'pylint', 'dnsgen']
 
 # These go tools will be installed globally. You will need to have the following settings in your
 # .bashrc already:
@@ -26,7 +26,8 @@ pip_packages = ['pipenv', 'pylint']
 # export GOROOT=/usr/lib/go
 # export GOPATH=$HOME/go
 # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-golang_modules_to_install = ['github.com/tomnomnom/assetfinder']
+golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
+                             'github.com/projectdiscovery/subfinder/cmd/subfinder']
 
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
