@@ -12,5 +12,28 @@ The default config can be found in config.py. You should updated it to match wha
 * Install specified python modules
 * Install specified golang tools
 * Set up some standardized directories
-* Run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem.
+
+## Scripts
+Lastly, this script will run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem. You can use the following script that installs Google Chrome as a template:
+
+``` sh
+#!/bin/bash
+GREEN="\033[1;32m"
+GREY="\033[0;37m"
+ENDCOLOR="\e[0m"
+
+# Check if Chrome is installed
+if [ $(sudo dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "ok installed") -eq 0 ]
+then
+    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing Google Chrome"
+
+    cd ~
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt install google-chrome-stable_current_amd64.deb
+    rm -rf google-chrome-stable_current_amd64.deb
+
+else
+    echo -ne $GREY">>> "$ENDCOLOR; echo "Package 'google-chrome-stable' already installed"
+fi
+```
 

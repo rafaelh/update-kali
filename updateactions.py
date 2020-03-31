@@ -72,11 +72,14 @@ def pip_package_install(pip_packages, installed_pip_packages):
 def install_golang_module(module):
     ''' Install the specified Golang module '''
     modulename = module.split("/")[-1].lower()
+    print("module = " + module) # remove
+    print("modulename = " + modulename) # remove
     if not os.path.exists("/opt/" + modulename):
         print_red("Installing go module " + modulename)
-        cmdseries = ["export GOPATH=/opt/" + modulename,
-                     "sudo -E go get -u " + module,
+        cmdseries = ["sudo -E go get -u " + module,
                      "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" + modulename]
+        print(cmdseries) # remove
+        os.environ["GOPATH"] = "/opt/" + modulename
         for cmdstring in cmdseries:
             os.system(cmdstring)
 
