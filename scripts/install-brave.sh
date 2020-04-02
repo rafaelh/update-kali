@@ -6,7 +6,7 @@ ENDCOLOR="\e[0m"
 # Check if Brave is installed
 if [ $(sudo dpkg-query -W -f='${Status}' brave-browser 2>/dev/null | grep -c "ok installed") -eq 0 ]
 then
-    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing Google Chrome"
+    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing Brave"
 
     cd ~
     curl https://s3-us-west-2.amazonaws.com/brave-apt-staging/keys.asc | sudo apt-key add -
