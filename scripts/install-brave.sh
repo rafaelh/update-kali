@@ -10,7 +10,7 @@ then
 
     cd ~
     curl https://s3-us-west-2.amazonaws.com/brave-apt-staging/keys.asc | sudo apt-key add -
-    echo “deb [arch=amd64] https://s3-us-west-2.amazonaws.com/brave-apt-staging buster main” | sudo tee -a /etc/apt/sources.list.d/brave.list
+    echo "deb [arch=amd64] https://s3-us-west-2.amazonaws.com/brave-apt-staging buster main" | sudo tee -a /etc/apt/sources.list.d/brave.list
     sudo apt update
     sudo apt install brave-keyring brave-browser
 else
