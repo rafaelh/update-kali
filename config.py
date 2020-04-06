@@ -13,7 +13,7 @@ directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates'
 # These kali packages will be installed
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                        'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv', 
-                       'apt-transport-https', 'curl']
+                       'apt-transport-https', 'curl', 'ufw', 'gufw']
 
 # These kali packages will be removed
 packages_to_remove = ['chromium']
@@ -41,7 +41,11 @@ ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
 personal_repositories_to_sync = ['git@github.com:rafaelh/security.git',
                                  'git@github.com:rafaelh/notes.git']
 
-# Last of all, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
+# Next, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
 # provided it's # executable. For example, the current scripts install VS Code, Google Chrome and
 # Typora. Any script that goes in this directory should be written so it can run multiple times
 # without causing problems.
+
+# Services to print the status of. I use different services on different installations, so it's 
+# useful to be reminded of what is started.
+systemd_services = ['sshd', 'postgresql', 'ufw']
