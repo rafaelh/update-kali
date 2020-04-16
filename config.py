@@ -34,7 +34,8 @@ golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
-                            'https://github.com/payloadbox/xss-payload-list']
+                            'https://github.com/payloadbox/xss-payload-list',
+                            'https://github.com/Cillian-Collins/dirscraper']
 
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
