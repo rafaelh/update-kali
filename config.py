@@ -28,7 +28,8 @@ pip_packages = ['pipenv', 'pylint', 'dnsgen']
 # export GOPATH=$HOME/go
 # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
-                             'github.com/projectdiscovery/subfinder/cmd/subfinder']
+                             'github.com/projectdiscovery/subfinder/cmd/subfinder',
+                             'github.com/lc/gau']
 
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
