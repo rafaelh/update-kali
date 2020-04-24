@@ -9,7 +9,7 @@ import os
 home_dir = os.getenv("HOME")
 
 personal_repo_directory = home_dir + '/x'
-external_repo_directory = '/opt'
+external_tools_directory = '/opt'
 
 # These directories will be removed from your home directory
 directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates', 'Videos']

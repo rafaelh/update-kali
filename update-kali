@@ -28,7 +28,7 @@ def main():
     pip_package_install(pip_packages, installed_pip_packages)
 
     # Take ownership of the external tools directory
-    take_ownership(external_repo_directory)
+    take_ownership(external_tools_directory)
 
     # Install golang tools
     for module in golang_modules_to_install:
@@ -37,7 +37,7 @@ def main():
     # Create and remove specified directories
     print_bold_green("Creating directory structure")
     create_directory(personal_repo_directory)
-    create_directory(external_repo_directory)
+    create_directory(external_tools_directory)
     for directory in directories_to_remove:
         remove_directory(directory)
 
@@ -46,7 +46,7 @@ def main():
     for repo in personal_repositories_to_sync:
         sync_git_repo(repo.replace(".git", ""), personal_repo_directory)
     for repo in ext_repositories_to_sync:
-        sync_git_repo(repo, external_repo_directory)
+        sync_git_repo(repo, external_tools_directory)
 
     # Run *.sh and *.py files in the /scripts directory
     print_bold_green("Running scripts")
