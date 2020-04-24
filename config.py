@@ -3,9 +3,8 @@ import os
 # This file defines what the update script should do.
 
 # Git Repositories
-# My preference is to install most external repositories under a single directory in my home folder,
-# and to the same with other people's repositories in a separate directory. These will be prefixed
-# with the user's home directory.
+# My preference is to install most external repositories, Go tools, etc under /opt, and to keep all
+# my git repositories in a single directory under my home folder.
 home_dir = os.getenv("HOME")
 
 personal_repo_directory = home_dir + '/x'
