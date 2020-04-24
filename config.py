@@ -1,11 +1,15 @@
+import os
+
 # This file defines what the update script should do.
 
 # Git Repositories
 # My preference is to install most external repositories under a single directory in my home folder,
 # and to the same with other people's repositories in a separate directory. These will be prefixed
 # with the user's home directory.
-personal_repo_dir = '/x'
-external_repo_dir = '/z'
+home_dir = os.getenv("HOME")
+
+personal_repo_directory = home_dir + '/x'
+external_repo_directory = '/opt'
 
 # These directories will be removed from your home directory
 directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates', 'Videos']
@@ -36,7 +40,8 @@ ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/SecureAuthCorp/impacket',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
                             'https://github.com/payloadbox/xss-payload-list',
-                            'https://github.com/Cillian-Collins/dirscraper']
+                            'https://github.com/Cillian-Collins/dirscraper',
+                            'https://github.com/maurosoria/dirsearch']
 
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
@@ -48,6 +53,6 @@ personal_repositories_to_sync = ['git@github.com:rafaelh/security.git',
 # Typora. Any script that goes in this directory should be written so it can run multiple times
 # without causing problems.
 
-# Services to print the status of. I use different services on different installations, so it's 
+# Services to print the status of. I use different services on different installations, so it's
 # useful to be reminded of what is started.
 systemd_services = ['sshd', 'postgresql', 'ufw']

@@ -29,6 +29,11 @@ def elevate_privileges():
     status = os.system("sudo date")
     return status
 
+def take_ownership(directory):
+    username = os.path.expanduser("~").split('/')[2]
+    cmdstring = "sudo chown -R " + username + ":" + username + " " + directory
+    os.system(cmdstring)
+
 def update_packages():
     """ Do a general update of the system packages """
     print_bold_green("General Update")

@@ -8,11 +8,6 @@ from updateactions import *
 from config import *
 
 def main():
-    # Set variables
-    home_dir = os.getenv("HOME")
-    personal_repo_directory = home_dir + personal_repo_dir
-    external_repo_directory = home_dir + external_repo_dir
-
     # Get sudo privileges
     if elevate_privileges(): sys.exit(1)
 
@@ -31,6 +26,9 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
+
+    # Take ownership of the external tools directory
+    take_ownership(external_repo_directory)
 
     # Install golang tools
     for module in golang_modules_to_install:
