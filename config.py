@@ -34,7 +34,8 @@ golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
                              'github.com/projectdiscovery/subfinder/cmd/subfinder',
                              'github.com/lc/gau',
                              'github.com/theblackturtle/wildcheck',
-                             'github.com/tomnomnom/httprobe']
+                             'github.com/tomnomnom/httprobe',
+                             'github.com/hakluke/hakrawler']
 
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
