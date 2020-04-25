@@ -16,7 +16,7 @@ directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates'
 # These kali packages will be installed
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                        'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
-                       'apt-transport-https', 'curl', 'ufw', 'gufw', 'filezilla']
+                       'apt-transport-https', 'curl', 'ufw', 'gufw', 'filezilla', 'meld']
 
 # These kali packages will be removed
 packages_to_remove = ['chromium']
@@ -32,7 +32,9 @@ pip_packages = ['pipenv', 'pylint', 'dnsgen']
 # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
                              'github.com/projectdiscovery/subfinder/cmd/subfinder',
-                             'github.com/lc/gau']
+                             'github.com/lc/gau',
+                             'github.com/theblackturtle/wildcheck',
+                             'github.com/tomnomnom/httprobe']
 
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
