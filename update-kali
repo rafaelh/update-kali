@@ -28,7 +28,7 @@ def main():
     pip_package_install(pip_packages, installed_pip_packages)
 
     # Take ownership of the external tools directory
-    take_ownership(external_tools_directory)
+    #take_ownership(external_tools_directory)
 
     # Install golang tools
     for module in golang_modules_to_install:
