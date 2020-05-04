@@ -19,7 +19,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
                        'apt-transport-https', 'curl', 'ufw', 'gufw', 'filezilla', 'meld']
 
 # These kali packages will be removed
-packages_to_remove = ['chromium']
+packages_to_remove = []
 
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint', 'dnsgen']
@@ -36,7 +36,9 @@ golang_modules_to_install = ['github.com/tomnomnom/assetfinder',
                              'github.com/theblackturtle/wildcheck',
                              'github.com/tomnomnom/httprobe',
                              'github.com/hakluke/hakrawler',
-                             'github.com/tomnomnom/qsreplace']
+                             'github.com/tomnomnom/qsreplace',
+                             'github.com/hahwul/dalfox',
+                             'github.com/tomnomnom/hacks/tree/master/kxss']
 
 # These git repositories will be synced to the 'external repo' directory
 ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
