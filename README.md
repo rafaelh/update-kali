@@ -13,6 +13,9 @@ The default config can be found in config.py. You should updated it to match wha
 * Install specified golang tools
 * Set up some standardized directories
 
+## Updating Go modules
+The Go modules you install will most likely keep on getting worked on, but you'll only get the benefit of those once you update and recompile the associated repository. This takes a long time, so I've added a separate command `update-go-modules` that iterates through updating them.
+
 ## Scripts
 Lastly, this script will run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem. You can use the following script that installs Google Chrome as a template:
 
