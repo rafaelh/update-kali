@@ -45,7 +45,8 @@ ext_repositories_to_sync = ['https://github.com/danielmiessler/SecLists',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
                             'https://github.com/payloadbox/xss-payload-list',
                             'https://github.com/Cillian-Collins/dirscraper',
-                            'https://github.com/maurosoria/dirsearch']
+                            'https://github.com/maurosoria/dirsearch',
+                            'https://github.com/s0md3v/XSStrike']
 
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
