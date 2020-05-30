@@ -51,7 +51,7 @@ def install_package(package, apt_cache):
     if apt_cache[package].is_installed:
         print_grey("Package '" + package + "' already installed")
     else:
-        print_red("\nInstalling " + package)
+        print_red("Installing " + package)
         cmdstring = "sudo apt install -y " + package
         if package == "pip": cmdstring += " && sudo pip3 install --upgrade pip"
         os.system(cmdstring)
