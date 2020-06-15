@@ -22,7 +22,7 @@ def print_grey(message):
 
 def print_red(message):
     """ Prints a message to the console prefixed with a red '>>>' """
-    print("\033[0;31;40m>>> \033[0;37m" + message + "\033[0;37m")
+    print("\033[0;31m>>> \033[0;37m" + message + "\033[0;37m")
 
 def elevate_privileges():
     """ Gets sudo privileges and returns the current date """
@@ -31,7 +31,7 @@ def elevate_privileges():
 
 def take_ownership(directory):
     username = os.path.expanduser("~").split('/')[2]
-    cmdstring = "sudo chown -R " + username + ":" + username + " " + directory
+    cmdstring = "sudo chown " + username + ":" + username + " " + directory
     os.system(cmdstring)
 
 def update_packages():
