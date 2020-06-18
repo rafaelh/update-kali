@@ -52,23 +52,9 @@ def main():
     print_bold_green("Running scripts")
     run_scripts()
 
-    # Show status of optional systemd services
-    print_bold_green("Status of optional services")
-    for system in systemd_services:
-        if check_service_status(system) == False:
-            print_green(system + " is active")
-        else:
-            print_red(system + " is inactive")
-
     print("\nAll done. Go break stuff.\n")
 
 
 if __name__ == '__main__':
     main()
 
-
-'''
-TODO:
-pip install impacket if it exists
-
-'''

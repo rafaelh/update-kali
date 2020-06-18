@@ -41,11 +41,6 @@ def update_packages():
     for updatecmd in updatecmds:
         os.system("sudo apt -y " + updatecmd)
 
-def check_service_status(service):
-    """ Returns 'active' or 'inactive' depending on service status """
-    status = os.system("systemctl is-active --quiet " + service)
-    return status
-
 def install_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
     if apt_cache[package].is_installed:
