@@ -4,7 +4,10 @@ GREY="\033[0;37m"
 ENDCOLOR="\e[0m"
 
 # === Exit without proceeding if run in WSL ===
-if [ -d /mnt/c/ ]; then exit 0; fi
+if [ -d /mnt/c/ ]; then
+    echo -ne $GREY">>> "$ENDCOLOR; echo "Skipping Google Chrome on WSL"
+    exit 0
+fi
 
 # Check if typora is installed
 if [ $(sudo dpkg-query -W -f='${Status}' code 2>/dev/null | grep -c "ok installed") -eq 0 ]
