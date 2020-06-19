@@ -16,7 +16,3 @@ while true; do
         * ) echo; echo "Please answer yes or no. "; echo;;
     esac
 done
-
-
-
-
