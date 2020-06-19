@@ -1,5 +1,5 @@
 # update-kali
-A script to set up Kali Linux with additional tools
+Scripts to set up Kali Linux with additional tools, and maintain them.
 
 ## What is this?
 I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's just set up for my personal use, but I'm intending to make it more generic over time.
@@ -13,10 +13,13 @@ The default config can be found in config.py. You should updated it to match wha
 * Install specified golang tools
 * Set up some standardized directories
 
+**Note:** The script will change the ownership of your tools directory, which is `/opt` by default, to your user so that you aren't building with sudo privileges. Change the tools directory if you don't want that to happen.
+
 ## Updating Go modules
 The Go modules you install will most likely keep on getting worked on, but you'll only get the benefit of those once you update and recompile the associated repository. This takes a long time, so I've added a separate command `update-go-modules` that iterates through updating them.
 
-**Note:** The script will change the ownership of your tools directory, which is `/opt` by default, to your user so that you aren't building with sudo privileges. Change the tools directory if you don't want that to happen.
+## Updating Python modules
+You can update all python pip modules across the system using `update-python-modules`. Be aware that this may introduce breaking changes for your Python scripts, which is why venv is your friend.
 
 ## Scripts
 Lastly, this script will run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem. You can use the following script that installs Google Chrome as a template:
@@ -46,6 +49,5 @@ then
 else
     echo -ne $GREY">>> "$ENDCOLOR; echo "Package 'google-chrome-stable' already installed"
 fi
-
 ```
 
