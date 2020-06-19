@@ -5,7 +5,7 @@ ENDCOLOR="\e[0m"
 
 # === Exit without proceeding if run in WSL ===
 if [ -d /mnt/c/ ]; then
-    echo -ne $GREY">>> "$ENDCOLOR; echo "Skipping Google Chrome on WSL"
+    echo -ne $GREY">>> "$ENDCOLOR; echo "Skipping VS Code on WSL"
     exit 0
 fi
 
