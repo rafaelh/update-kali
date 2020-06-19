@@ -5,16 +5,19 @@ import apt
 import subprocess
 import sys
 from updateactions import *
-from config import *
+from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
+                    packages_to_install, packages_to_remove, pip_packages,
+                    golang_modules_to_install, ext_repositories_to_sync,
+                    personal_repositories_to_sync)
 
 def main():
     # Get sudo privileges
     if elevate_privileges(): sys.exit(1)
 
-    # Update and upgrade kali packages
+    # Update and upgrade apt packages
     update_packages()
 
-    # Install additional kali packages
+    # Install or remove specified apt packages
     print_message("green", "Checking installed packages")
     apt_cache = apt.Cache()
     for package in packages_to_install:

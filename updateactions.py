@@ -25,9 +25,11 @@ def take_ownership(directory):
 def update_packages():
     """ Do a general update of the system packages """
     print_message("green", "General Update")
-    updatecmds = ['update', 'upgrade', 'dist-upgrade', 'autoremove']
-    for updatecmd in updatecmds:
-        os.system("sudo apt -y " + updatecmd)
+    cmdseries = ['sudo apt update',
+                 'sudo apt full-upgrade -y',
+                 'sudo apt autoremove -y']
+    for cmdstring in cmdseries:
+        os.system(cmdstring)
 
 def install_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
@@ -49,6 +51,7 @@ def remove_package(package, apt_cache):
         os.system(cmdstring)
 
 def pip_package_install(pip_packages, installed_pip_packages):
+    """ Install python pip package """
     for package in pip_packages:
         if package in installed_pip_packages:
             print_message("grey", "Pip package '" + package + "' already installed")
@@ -63,7 +66,8 @@ def install_golang_module(module):
     if not os.path.exists("/opt/" + modulename):
         print_message("red", "Installing go module " + modulename)
         cmdseries = ["sudo -E go get -u " + module,
-                     "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" + modulename]
+                     "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" \
+                     + modulename]
         os.environ["GOPATH"] = "/opt/" + modulename
         for cmdstring in cmdseries:
             os.system(cmdstring)
