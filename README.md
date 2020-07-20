@@ -2,7 +2,7 @@
 Scripts to set up Kali Linux with additional tools, and maintain them.
 
 ## What is this?
-I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's just set up for my personal use, but I'm intending to make it more generic over time.
+I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's just set up for my personal use, but I'm intending to make it more generic over time. Note that the first thing that it does is check that it's synced with git, so you'll want to fork this repo and add your config changes there, or modify the code to remove the check.
 
 ## Config
 The default config can be found in config.py. You should updated it to match what you want, otherwise you'll have my preferences used. This script will:
