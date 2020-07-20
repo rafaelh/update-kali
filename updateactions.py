@@ -21,7 +21,7 @@ def check_update_kali_version():
     ''' Update the main script if it's lagging behind the repo '''
     print_message("green", "Syncing 'update-kali' script")
     update_kali_directory = os.path.dirname(os.path.realpath(__file__))
-    cmdstring = "git -C " + update_kali_directory + " pull origin master"
+    cmdstring = "git -C " + update_kali_directory + " pull origin main"
     os.system(cmdstring)
 
 def take_ownership(directory):
