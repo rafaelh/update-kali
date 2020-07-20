@@ -6,4 +6,3 @@ ENDCOLOR="\e[0m"
 echo
 echo -ne $GREEN">>> "$ENDCOLOR; echo "Updating Locate database"
 sudo updatedb
-

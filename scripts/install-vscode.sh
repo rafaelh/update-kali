@@ -5,7 +5,6 @@ ENDCOLOR="\e[0m"
 
 # === Exit without proceeding if run in WSL ===
 if [ -d /mnt/c/ ]; then
-    echo -ne $GREY">>> "$ENDCOLOR; echo "Skipping VS Code on WSL"
     exit 0
 fi
 
@@ -13,7 +12,6 @@ fi
 if [ $(sudo dpkg-query -W -f='${Status}' code 2>/dev/null | grep -c "ok installed") -eq 0 ]
 then
     echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing VS Code"
-
     cd ~
     curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
     sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
@@ -22,6 +20,4 @@ then
     sudo apt install -y apt-transport-https
     sudo apt update -y
     sudo apt install -y code
-else 
-    echo -ne $GREY">>> "$ENDCOLOR; echo "Package 'code' already installed"
 fi

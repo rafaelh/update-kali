@@ -55,7 +55,7 @@ def main():
         sync_git_repo(repo, external_tools_directory)
 
     # Run *.sh and *.py files in the /scripts directory
-    print_message("green", "Running scripts")
+    print_message("green", "Checking for scripts to run")
     run_scripts()
 
     print("\nAll done. Go break stuff.\n")
