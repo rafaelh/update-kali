@@ -75,9 +75,7 @@ def install_golang_module(module):
 
 def create_directory(directory):
     ''' Checks if the specified directory exists, and creates it if not '''
-    if os.path.exists(directory):
-        print_message("grey", "Directory exists: " + directory)
-    else:
+    if not os.path.exists(directory):
         print_message("red", "Creating directory: " + directory)
         cmdstring = "mkdir " + directory
         os.system(cmdstring)
