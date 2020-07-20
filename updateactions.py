@@ -17,6 +17,13 @@ def elevate_privileges():
     status = os.system("sudo date")
     return status
 
+def check_update_kali_version():
+    ''' Update the main script if it's lagging behind the repo '''
+    print_message("green", "Syncing 'update-kali' script")
+    update_kali_directory = os.path.dirname(os.path.realpath(__file__))
+    cmdstring = "git -C " + update_kali_directory + " pull origin master"
+    os.system(cmdstring)
+
 def take_ownership(directory):
     username = os.path.expanduser("~").split('/')[2]
     cmdstring = "sudo chown " + username + ":" + username + " " + directory
@@ -113,3 +120,4 @@ def run_scripts():
                 os.system(cmdstring)
     else:
         print_message("red", "'scripts' directory is missing")
+
