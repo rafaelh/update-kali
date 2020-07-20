@@ -40,9 +40,7 @@ def update_packages():
 
 def install_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
-    if apt_cache[package].is_installed:
-        print_message("grey", "Package '" + package + "' already installed")
-    else:
+    if not apt_cache[package].is_installed:
         print_message("red", "Installing " + package)
         cmdstring = "sudo apt install -y " + package
         if package == "pip": cmdstring += " && sudo pip3 install --upgrade pip"
@@ -50,19 +48,15 @@ def install_package(package, apt_cache):
 
 def remove_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
-    if not apt_cache[package].is_installed:
-        print_message("grey", "Package '" + package + "' already removed")
-    else:
-        print_message("red", "\nRemoving " + package)
+    if apt_cache[package].is_installed:
+        print_message("red", "Removing " + package)
         cmdstring = "sudo apt remove -y " + package
         os.system(cmdstring)
 
 def pip_package_install(pip_packages, installed_pip_packages):
     """ Install python pip package """
     for package in pip_packages:
-        if package in installed_pip_packages:
-            print_message("grey", "Pip package '" + package + "' already installed")
-        else:
+        if not package in installed_pip_packages:
             print_message("red", "Installing pip package " + package)
             cmdstring = "sudo pip3 install --upgrade " + package
             os.system(cmdstring)
