@@ -15,7 +15,8 @@ def main():
     if elevate_privileges(): sys.exit(1)
 
     # Sync the script with Github version
-    check_update_kali_version()
+    scriptversion = check_update_kali_version()
+    print scriptversion
 
     # Update and upgrade apt packages
     update_packages()
