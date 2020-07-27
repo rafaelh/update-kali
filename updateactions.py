@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import apt
-import subprocess
 import sys
 
 def print_message(color, message):
@@ -16,13 +15,6 @@ def elevate_privileges():
     """ Gets sudo privileges and returns the current date """
     status = os.system("sudo date")
     return status
-
-def check_update_kali_version():
-    ''' Update the main script if it's lagging behind the repo '''
-    print_message("green", "Syncing 'update-kali' script")
-    update_kali_directory = os.path.dirname(os.path.realpath(__file__))
-    cmdstring = "git -C " + update_kali_directory + " pull origin main"
-    os.system(cmdstring)
 
 def take_ownership(directory):
     username = os.path.expanduser("~").split('/')[2]
