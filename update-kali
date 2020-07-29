@@ -20,7 +20,7 @@ def main():
                                           "pull", "origin", "main"], stdout=subprocess.PIPE)
     script_git_status_output = script_git_status.communicate()[0]
     if "Already up to date" not in script_git_status_output.decode():
-        print_message("red", "Script Updated. Please run the new version.\n")
+        print_message("red", "\nScript Updated. Please run the new version.\n")
         sys.exit(1)
 
 
