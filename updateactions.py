@@ -5,9 +5,9 @@ import sys
 
 def print_message(color, message):
     """ Prints a formatted message to the console """
-    if   color == "green":  print("\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "red":    print("\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
+    if   color == "green":  print("\n\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
+    elif color == "yellow": print("\033[1;33m>>> \033[0;37m]" + message + "\033[0;37m")
+    elif color == "red":    print("\n\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
     elif color == "grey":   print(">>> " + message)
     else:                   print("\033[0;31mInvalid Format \033[0;37m" + message + "\033[0;37m")
 
@@ -80,12 +80,12 @@ def remove_directory(directory):
         cmdstring = "rmdir " + directory
         os.system(cmdstring)
 
-def sync_git_repo(gitrepo, repo_collection_dir):
+def sync_git_repo(gitrepo, repo_collection_dir, branch="master"):
     ''' Sync the specified git repository '''
     repo_name = gitrepo.split("/")[-1].lower()
     if os.path.exists(repo_collection_dir + '/' + repo_name):
         print_message("yellow", "Syncing " + repo_name)
-        cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull origin master"
+        cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull origin " + branch
         os.system(cmdstring)
     else:
         print_message("red", "Cloning " + repo_name)
