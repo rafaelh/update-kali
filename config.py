@@ -55,8 +55,7 @@ ext_repositories_to_sync = [
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
 personal_repositories_to_sync = [
-                                'git@github.com:rafaelh/security.git',
-                                'git@github.com:rafaelh/notes.git'
+                                'git@github.com:rafaelh/security.git'
                                 ]
 
 # Next, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
