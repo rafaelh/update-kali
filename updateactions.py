@@ -6,7 +6,7 @@ import sys
 def print_message(color, message):
     """ Prints a formatted message to the console """
     if   color == "green":  print("\n\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m>>> \033[0;37m]" + message + "\033[0;37m")
+    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m")
     elif color == "red":    print("\n\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
     elif color == "grey":   print(">>> " + message)
     else:                   print("\033[0;31mInvalid Format \033[0;37m" + message + "\033[0;37m")
