@@ -16,7 +16,8 @@ directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates'
 # These kali packages will be installed
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                        'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
-                       'apt-transport-https', 'curl', 'filezilla', 'meld']
+                       'apt-transport-https', 'curl', 'filezilla', 'meld',
+                       'net-tools', 'tmux']
 
 # These kali packages will be removed
 packages_to_remove = []
