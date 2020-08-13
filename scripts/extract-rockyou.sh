@@ -10,4 +10,6 @@ then
     then
         echo -ne $GREEN">>> "$ENDCOLOR; echo "Extracting rockyou.txt"
         sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
+    fi
 fi
+
