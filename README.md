@@ -4,9 +4,9 @@ Scripts to set up Kali Linux with additional tools, and maintain them.
 ![Image of update-kali script running](update-kali.gif)
 
 ## What is this?
-I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's mostly set up for my personal use, but with a little modification anyone else can use it too:
+I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's set up for my personal use, but with a little modification you can use it too:
 
-* Fork the repo so that you can commit changes to `config.py`, and so the script updates from the reight place
+* Fork the repo so that you can commit changes to `config.py`, and so the script updates from the right place
 * Update `config.py` with your preferences
 * Go through `/scripts/` and delete the ones you don't want - they should be self-explanatory.
 * Make sure you have the following installed: `python3`, `python-apt` and `git`.
@@ -18,7 +18,10 @@ The default config can be found in `config.py`. You should updated it to match w
 * Install and remove specified packages
 * Install specified python modules
 * Install specified golang tools
-* Set up some standardized directories
+* Set up and remove specified directories
+* Sync specified git repos to `~/x`, or a directory you nominate (private repos)
+* Sync specified git repos to `/opt`, or a directory you nominate (public repos)
+* Run all the scripts in `/scripts`
 
 **Note:** The script will change the ownership of your tools directory, which is `/opt` by default, to your user so that you aren't building with sudo privileges. Change the tools directory if you don't want that to happen.
 
