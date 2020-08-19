@@ -4,7 +4,7 @@ GREY="\033[0;37m"
 ENDCOLOR="\e[0m"
 
 # === Exit without proceeding if run in WSL ===
-if [ -d /mnt/c/ ]; then
+if [ -f /mnt/c/Windows/System32/wsl.exe ]; then
     exit 0
 fi
 
