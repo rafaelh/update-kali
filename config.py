@@ -1,14 +1,6 @@
 import os
 
-# This file defines what the update script should do.
-
-# Git Repositories
-# My preference is to install most external repositories, Go tools, etc under /opt, and to keep all
-# my git repositories in a single directory under my home folder.
-home_dir = os.getenv("HOME")
-
-personal_repo_directory = home_dir + '/x'
-external_tools_directory = '/opt'
+''' This file defines what the update-kali script should do. '''
 
 # These directories will be removed from your home directory
 directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates', 'Videos']
@@ -20,7 +12,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
                        'net-tools', 'tmux']
 
 # These kali packages will be removed
-packages_to_remove = []
+packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
 
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint', 'dnsgen']
@@ -45,6 +37,7 @@ golang_modules_to_install = [
                             ]
 
 # These git repositories will be synced to the 'external repo' directory
+external_tools_directory = '/opt'
 ext_repositories_to_sync = [
                             'https://github.com/danielmiessler/SecLists',
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
@@ -55,9 +48,8 @@ ext_repositories_to_sync = [
 
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
-personal_repositories_to_sync = [
-                                'git@github.com:rafaelh/security.git'
-                                ]
+personal_repo_directory = os.getenv("HOME") + '/x'
+personal_repositories_to_sync = []
 
 # Next, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
 # provided it's # executable. For example, the current scripts install VS Code, Google Chrome and
