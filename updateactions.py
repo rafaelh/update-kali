@@ -6,7 +6,7 @@ import sys
 def print_message(color, message):
     """ Prints a formatted message to the console """
     if   color == "green":  print("\n\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m", end = '')
+    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m", end="")
     elif color == "red":    print("\n\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
     elif color == "grey":   print(">>> " + message)
     else:                   print("\033[0;31mInvalid Format \033[0;37m" + message + "\033[0;37m")
@@ -85,6 +85,7 @@ def sync_git_repo(gitrepo, repo_collection_dir):
     repo_name = gitrepo.split("/")[-1].lower()
     if os.path.exists(repo_collection_dir + '/' + repo_name):
         print_message("yellow", "Syncing " + repo_name + ": ")
+        sys.stdout.flush()
         cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull"
         os.system(cmdstring)
     else:
