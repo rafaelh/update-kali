@@ -49,8 +49,8 @@ ext_repositories_to_sync = [
 # These git repositories will be synced to the 'personal repo' directory. I use my home directory.
 personal_repo_directory = os.getenv("HOME")
 personal_repositories_to_sync = [
-                                'https://github.com/rafaelh/dotfiles',
-                                'https://github.com/rafaelh/.private'
+                                'git@github.com:rafaelh/dotfiles',
+                                'git@github.com:rafaelh/.private'
                                 ]
 
 # Next, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
