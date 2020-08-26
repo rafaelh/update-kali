@@ -6,7 +6,7 @@ import sys
 def print_message(color, message):
     """ Prints a formatted message to the console """
     if   color == "green":  print("\n\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m")
+    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m", end = '')
     elif color == "red":    print("\n\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
     elif color == "grey":   print(">>> " + message)
     else:                   print("\033[0;31mInvalid Format \033[0;37m" + message + "\033[0;37m")
@@ -54,7 +54,7 @@ def pip_package_install(pip_packages, installed_pip_packages):
             os.system(cmdstring)
 
 def install_golang_module(module):
-    ''' Install the specified Golang module '''
+    """ Install the specified Golang module """
     modulename = module.split("/")[-1].lower()
     if not os.path.exists("/opt/" + modulename):
         print_message("red", "Installing go module " + modulename)
@@ -66,14 +66,14 @@ def install_golang_module(module):
             os.system(cmdstring)
 
 def create_directory(directory):
-    ''' Checks if the specified directory exists, and creates it if not '''
+    """ Checks if the specified directory exists, and creates it if not """
     if not os.path.exists(directory):
         print_message("red", "Creating directory: " + directory)
         cmdstring = "mkdir " + directory
         os.system(cmdstring)
 
 def remove_directory(directory):
-    ''' Checks if the specified directory exists, and deletes it if it does '''
+    """ Checks if the specified directory exists, and deletes it if it does """
     directory = os.getenv("HOME") + '/' + directory
     if os.path.exists(directory):
         print_message("red", "Removing directory: " + directory)
@@ -81,10 +81,10 @@ def remove_directory(directory):
         os.system(cmdstring)
 
 def sync_git_repo(gitrepo, repo_collection_dir):
-    ''' Sync the specified git repository '''
+    """ Sync the specified git repository """
     repo_name = gitrepo.split("/")[-1].lower()
     if os.path.exists(repo_collection_dir + '/' + repo_name):
-        print_message("yellow", "Syncing " + repo_name)
+        print_message("yellow", "Syncing " + repo_name + ": ")
         cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull"
         os.system(cmdstring)
     else:
@@ -93,7 +93,7 @@ def sync_git_repo(gitrepo, repo_collection_dir):
         os.system(cmdstring)
 
 def run_scripts():
-    ''' Run each .sh or .py file in the scripts directory '''
+    """ Run each .sh or .py file in the scripts directory """
     script_directory = os.path.dirname(os.path.realpath(__file__)) + '/scripts'
 
     if os.path.exists(script_directory):
