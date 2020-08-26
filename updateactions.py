@@ -80,12 +80,12 @@ def remove_directory(directory):
         cmdstring = "rmdir " + directory
         os.system(cmdstring)
 
-def sync_git_repo(gitrepo, repo_collection_dir, branch="master"):
+def sync_git_repo(gitrepo, repo_collection_dir):
     ''' Sync the specified git repository '''
     repo_name = gitrepo.split("/")[-1].lower()
     if os.path.exists(repo_collection_dir + '/' + repo_name):
         print_message("yellow", "Syncing " + repo_name)
-        cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull origin " + branch
+        cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull"
         os.system(cmdstring)
     else:
         print_message("red", "Cloning " + repo_name)

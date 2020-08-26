@@ -48,8 +48,9 @@ ext_repositories_to_sync = [
 
 # These git repositories will be synced to the 'personal repo' directory. '.git' will be stripped
 # from each string.
-personal_repo_directory = os.getenv("HOME") + '/x'
-personal_repositories_to_sync = []
+personal_repo_directory = os.getenv("HOME") + ''
+personal_repositories_to_sync = ['https://github.com/rafaelh/dotfiles',
+                                 'https://github.com/rafaelh/.private']
 
 # Next, take a look in the /scripts directory. Every script ending in .sh or .py will be run,
 # provided it's # executable. For example, the current scripts install VS Code, Google Chrome and
