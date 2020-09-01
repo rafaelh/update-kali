@@ -9,13 +9,13 @@ directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates'
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                        'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
                        'apt-transport-https', 'curl', 'filezilla', 'meld',
-                       'net-tools', 'tmux']
+                       'net-tools', 'tmux', 'steghide']
 
 # These kali packages will be removed
 packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
 
 # These python packages will be installed globally
-pip_packages = ['pipenv', 'pylint', 'dnsgen']
+pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker']
 
 # These go tools will be installed globally. You will need to have the following settings in your
 # .bashrc already:
