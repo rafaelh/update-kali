@@ -5,11 +5,12 @@ import sys
 
 def print_message(color, message):
     """ Prints a formatted message to the console """
-    if   color == "green":  print("\n\033[1;32m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m>>> \033[0;37m"   + message + "\033[0;37m", end="")
-    elif color == "red":    print("\n\033[1;31m>>> \033[0;37m" + message + "\033[0;37m")
-    elif color == "grey":   print(">>> " + message)
-    else:                   print("\033[0;31mInvalid Format \033[0;37m" + message + "\033[0;37m")
+    if   color == "green":  print("\033[1;32m[+] \033[0;37m" + message + "\033[0;37m")
+    elif color == "blue":   print("\033[0;34m[i] \033[0;37m" + message + "\033[0;37m")
+    elif color == "yellow": print("\033[1;33m[<] \033[0;37m" + message + "\033[0;37m", end="")
+    elif color == "red":    print("\033[1;31m[-] \033[0;37m" + message + "\033[0;37m")
+    elif color == "error":  print("\033[0;31m[!] \033[0;37m" + message + "\033[0;37m")
+    else:                   print("\033[0;41mInvalid Format\033[0;37m " + message + "\033[0;37m")
 
 def elevate_privileges():
     """ Gets sudo privileges and returns the current date """
@@ -23,7 +24,6 @@ def take_ownership(directory):
 
 def update_packages():
     """ Do a general update of the system packages """
-    print_message("green", "General Update")
     cmdseries = ['sudo apt update',
                  'sudo apt full-upgrade -y',
                  'sudo apt autoremove -y']
@@ -33,7 +33,7 @@ def update_packages():
 def install_package(package, apt_cache):
     """ Installs a package from apt or lets you know if its present """
     if not apt_cache[package].is_installed:
-        print_message("red", "Installing " + package)
+        print_message("green", "Installing " + package)
         cmdstring = "sudo apt install -y " + package
         if package == "pip": cmdstring += " && sudo pip3 install --upgrade pip"
         os.system(cmdstring)
@@ -49,7 +49,7 @@ def pip_package_install(pip_packages, installed_pip_packages):
     """ Install python pip package """
     for package in pip_packages:
         if not package in installed_pip_packages:
-            print_message("red", "Installing pip package " + package)
+            print_message("green", "Installing pip package " + package)
             cmdstring = "sudo pip3 install --upgrade " + package
             os.system(cmdstring)
 
@@ -57,7 +57,7 @@ def install_golang_module(module):
     """ Install the specified Golang module """
     modulename = module.split("/")[-1].lower()
     if not os.path.exists("/opt/" + modulename):
-        print_message("red", "Installing go module " + modulename)
+        print_message("green", "Installing go module " + modulename)
         cmdseries = ["sudo -E go get -u " + module,
                      "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" \
                      + modulename]
@@ -68,7 +68,7 @@ def install_golang_module(module):
 def create_directory(directory):
     """ Checks if the specified directory exists, and creates it if not """
     if not os.path.exists(directory):
-        print_message("red", "Creating directory: " + directory)
+        print_message("green", "Creating directory: " + directory)
         cmdstring = "mkdir " + directory
         os.system(cmdstring)
 
@@ -89,7 +89,7 @@ def sync_git_repo(gitrepo, repo_collection_dir):
         cmdstring = "git -C " + repo_collection_dir + '/' + repo_name + " pull"
         os.system(cmdstring)
     else:
-        print_message("red", "Cloning " + repo_name)
+        print_message("green", "Cloning " + repo_name)
         cmdstring = "git clone " + gitrepo + ' ' + repo_collection_dir + '/' + repo_name
         os.system(cmdstring)
 
@@ -104,5 +104,5 @@ def run_scripts():
                 cmdstring = script_directory + '/' + script
                 os.system(cmdstring)
     else:
-        print_message("red", "'scripts' directory is missing")
+        print_message("error", "'scripts' directory is missing")
 
