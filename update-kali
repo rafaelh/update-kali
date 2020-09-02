@@ -36,11 +36,13 @@ def main():
         remove_package(package, apt_cache)
 
     # Install python modules
+    print_message("blue", "Checking python modules")
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
 
     # Install gem packages
+    print_message("blue", "Checking ruby gems")
     gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
     installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
     gem_package_install(gem_packages, installed_gem_packages)
