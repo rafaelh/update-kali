@@ -10,7 +10,7 @@ fi
 # Check if typora is installed
 if [ $(sudo dpkg-query -W -f='${Status}' typora 2>/dev/null | grep -c "ok installed") -eq 0 ]
 then
-    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing Typora"
+    echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing Typora"
     wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
     echo -e "\ndeb https://typora.io/linux ./" | sudo tee -a /etc/apt/sources.list
     sudo apt update

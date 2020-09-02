@@ -11,7 +11,7 @@ fi
 # Check if typora is installed
 if [ $(sudo dpkg-query -W -f='${Status}' code 2>/dev/null | grep -c "ok installed") -eq 0 ]
 then
-    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing VS Code"
+    echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing VS Code"
     cd ~
     curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
     sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/

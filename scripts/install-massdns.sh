@@ -5,7 +5,7 @@ ENDCOLOR="\e[0m"
 # Check if MassDNS is installed
 if [ ! -d "/opt/massdns" ]
 then
-    echo -ne $GREEN">>> "$ENDCOLOR; echo "Installing massdns"
+    echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing massdns"
     cd /opt
     sudo git clone https://github.com/blechschmidt/massdns
     cd /opt/massdns

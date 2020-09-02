@@ -8,7 +8,7 @@ then
     # Check that it hasn't already been unzipped
     if [ ! -f "/usr/share/wordlists/rockyou.txt" ]
     then
-        echo -ne $GREEN">>> "$ENDCOLOR; echo "Extracting rockyou.txt"
+        echo -ne $GREEN"[+] "$ENDCOLOR; echo "Extracting rockyou.txt"
         sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
     fi
 fi

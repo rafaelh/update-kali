@@ -5,11 +5,11 @@ import sys
 
 def print_message(color, message):
     """ Prints a formatted message to the console """
-    if   color == "green":  print("\033[1;32m[+] \033[0;37m" + message + "\033[0;37m")
+    if   color == "green":  print("\033[0;32m[+] \033[0;37m" + message + "\033[0;37m")
     elif color == "blue":   print("\033[0;34m[i] \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[1;33m[<] \033[0;37m" + message + "\033[0;37m", end="")
-    elif color == "red":    print("\033[1;31m[-] \033[0;37m" + message + "\033[0;37m")
-    elif color == "error":  print("\033[0;31m[!] \033[0;37m" + message + "\033[0;37m")
+    elif color == "yellow": print("\033[0;33m[<] \033[0;37m" + message + "\033[0;37m", end="")
+    elif color == "red":    print("\033[0;31m[-] \033[0;37m" + message + "\033[0;37m")
+    elif color == "error":  print("\033[1;31m[!] \033[0;37m" + message + "\033[0;37m")
     else:                   print("\033[0;41mInvalid Format\033[0;37m " + message + "\033[0;37m")
 
 def elevate_privileges():
