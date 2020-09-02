@@ -6,7 +6,7 @@ import subprocess
 import sys
 from updateactions import *
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
-                    packages_to_install, packages_to_remove, pip_packages,
+                    packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
                     personal_repositories_to_sync)
 
@@ -20,7 +20,7 @@ def main():
                                           "pull", "origin", "main"], stdout=subprocess.PIPE)
     script_git_status_output = script_git_status.communicate()[0]
     if "Already up to date" not in script_git_status_output.decode():
-        print_message("red", "Script Updated. Please run the new version.\n")
+        print_message("error", "Script Updated. Please run the new version.\n")
         sys.exit(1)
 
     # Update and upgrade apt packages
@@ -39,6 +39,11 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
+
+    # Install gem packages
+    gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
+    installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
+    gem_package_install(gem_packages, installed_gem_packages)
 
     # Take ownership of the external tools directory
     take_ownership(external_tools_directory)

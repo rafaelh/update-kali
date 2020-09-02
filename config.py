@@ -17,6 +17,9 @@ packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
 # These python packages will be installed globally
 pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker']
 
+# These gem packages will be installed globally
+gem_packages = ['wpscan']
+
 # These go tools will be installed globally. You will need to have the following settings in your
 # .bashrc already:
 #
