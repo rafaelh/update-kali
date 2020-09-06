@@ -9,7 +9,7 @@ directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates'
 packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                        'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
                        'apt-transport-https', 'curl', 'filezilla', 'meld',
-                       'net-tools', 'tmux', 'steghide']
+                       'net-tools', 'tmux', 'steghide', 'bash-completion']
 
 # These kali packages will be removed
 packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
