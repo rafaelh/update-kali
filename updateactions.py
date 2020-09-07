@@ -2,19 +2,20 @@
 import os
 import apt
 import sys
+from datetime import datetime
 
 def print_message(color, message):
     """ Prints a formatted message to the console """
-    if   color == "green":  print("\033[1;32m[+] \033[0;37m" + message + "\033[0;37m")
-    elif color == "blue":   print("\033[1;34m[i] \033[0;37m" + message + "\033[0;37m")
-    elif color == "yellow": print("\033[0;33m[<] \033[0;37m" + message + "\033[0;37m", end="")
-    elif color == "red":    print("\033[1;31m[-] \033[0;37m" + message + "\033[0;37m")
-    elif color == "error":  print("\033[1;31m[!] \033[0;37m" + message + "\033[0;37m")
-    else:                   print("\033[0;41mInvalid Format\033[0;37m " + message + "\033[0;37m")
+    if   color == "green":  print("\033[1;32m[+] \033[0;37m" + datetime.now().strftime("%H:%M:%S") + " - " + message)
+    elif color == "blue":   print("\033[1;34m[i] \033[0;37m" + datetime.now().strftime("%H:%M:%S") + " - " + message)
+    elif color == "yellow": print("\033[0;33m[<] \033[0;37m" + datetime.now().strftime("%H:%M:%S") + " - " + message, end="")
+    elif color == "red":    print("\033[1;31m[-] \033[0;37m" + datetime.now().strftime("%H:%M:%S") + " - " + message)
+    elif color == "error":  print("\033[1;31m[!] \033[0;37m" + datetime.now().strftime("%H:%M:%S") + " - " + message)
+    else:                   print("\033[0;41mInvalid Format\033[0;37m " + datetime.now().strftime("%H:%M:%S") + " " + message)
 
 def elevate_privileges():
     """ Gets sudo privileges and returns the current date """
-    status = os.system("sudo date")
+    status = os.system("sudo date; echo")
     return status
 
 def take_ownership(directory):
