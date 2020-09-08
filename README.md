@@ -4,7 +4,7 @@ Scripts to set up Kali Linux with additional tools, and maintain them.
 ![Image of update-kali script running](update-kali.gif)
 
 ## What is this?
-I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. Currently it's set up for my personal use, but with a little modification you can use it too:
+I find that I need to keep a lot of Kali linux installations up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. It's set up for my personal use, but with a little modification you can use it too:
 
 * Fork the repo so that you can commit changes to `config.py`, and so the script updates from the right place
 * Update `config.py` with your preferences
@@ -30,6 +30,9 @@ The Go modules you install will most likely keep on getting worked on, but you'l
 
 ## Updating Python modules
 You can update all python pip modules across the system using `update-python-modules`. Be aware that this may introduce breaking changes for your Python scripts, which is why venv is your friend. Expect to get errors when you run this, since some packages are supplied by the system.
+
+## Updating Ruby Gems
+As above, you can update all ruby gems with `update-ruby-gems`. This basically runs `gem outdated; gem update`, but it seemed consistent to put it into a script.
 
 ## Scripts
 Lastly, this script will run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem. You can use the following script that installs Google Chrome as a template:
