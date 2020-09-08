@@ -27,16 +27,11 @@ gem_packages = ['wpscan']
 # export GOPATH=$HOME/go
 # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 golang_modules_to_install = [
-                            'github.com/tomnomnom/assetfinder',
                             'github.com/projectdiscovery/subfinder/cmd/subfinder',
                             'github.com/lc/gau',
-                            'github.com/theblackturtle/wildcheck',
-                            'github.com/tomnomnom/httprobe',
                             'github.com/hakluke/hakrawler',
-                            'github.com/tomnomnom/qsreplace',
                             'github.com/hahwul/dalfox',
                             'github.com/ffuf/ffuf',
-                            'github.com/dwisiswant0/hinject'
                             ]
 
 # These git repositories will be synced to the 'external repo' directory
