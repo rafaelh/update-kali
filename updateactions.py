@@ -113,4 +113,3 @@ def run_scripts():
                 os.system(cmdstring)
     else:
         print_message("error", "'scripts' directory is missing")
-
