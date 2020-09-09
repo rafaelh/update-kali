@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 GREEN="\033[1;32m"
 ENDCOLOR="\e[0m"
 
