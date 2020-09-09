@@ -39,8 +39,9 @@ Lastly, this script will run each of the `.sh` or `.py` files in the `scripts` d
 
 ``` sh
 #!/bin/bash
+set -eu
 GREEN="\033[1;32m"
-ENDCOLOR="\e[0m"
+ENDCOLOR="\033[0m"
 
 # === Exit without proceeding if run in WSL ===
 if [ -f /mnt/c/Windows/System32/wsl.exe ]; then

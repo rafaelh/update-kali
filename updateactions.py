@@ -32,15 +32,14 @@ def update_packages():
         os.system(cmdstring)
 
 def install_package(package, apt_cache):
-    """ Installs a package from apt or lets you know if its present """
+    """ Installs a package using apt """
     if not apt_cache[package].is_installed:
         print_message("green", "Installing " + package)
         cmdstring = "sudo apt install -y " + package
-        if package == "pip": cmdstring += " && sudo pip3 install --upgrade pip"
         os.system(cmdstring)
 
 def remove_package(package, apt_cache):
-    """ Installs a package from apt or lets you know if its present """
+    """ Removes a package using apt """
     if apt_cache[package].is_installed:
         print_message("red", "Removing " + package)
         cmdstring = "sudo apt remove -y " + package
