@@ -4,7 +4,10 @@ import os
 import apt
 import subprocess
 import sys
-from updateactions import *
+from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
+                           install_package, remove_package, pip_package_install,gem_package_install,
+                           install_golang_module, create_directory, remove_directory, sync_git_repo,
+                           run_scripts)
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
