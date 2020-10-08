@@ -16,7 +16,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
 packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
 
 # These python packages will be installed globally
-pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker']
+pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker', 'sslyze']
 
 # These gem packages will be installed globally
 gem_packages = ['wpscan']
