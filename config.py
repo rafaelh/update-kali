@@ -33,6 +33,7 @@ golang_modules_to_install = [
                             'github.com/hakluke/hakrawler',
                             'github.com/hahwul/dalfox',
                             'github.com/ffuf/ffuf',
+                            'github.com/zricethezav/gitleaks',
                             ]
 
 # These git repositories will be synced to the 'external repo' directory
