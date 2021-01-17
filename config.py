@@ -11,7 +11,7 @@ packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gob
                        'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
                        'tmux', 'steghide', 'bash-completion', 'ieee-data', 'python3-netaddr',
                        'ruby-full', 'powercat', 'twofi', 'cewl', 'nbtscan',
-                       'tree', 'upx-ucl', 'exe2hexbat', 'shellter']
+                       'tree', 'upx-ucl', 'exe2hexbat', 'shellter', 'grc']
 
 # These kali packages will be removed
 packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
@@ -39,8 +39,7 @@ golang_modules_to_install = [
 
 # These git repositories will be synced to the 'external repo' directory
 external_tools_directory = '/opt'
-ext_repositories_to_sync = [
-                            'https://github.com/danielmiessler/SecLists',
+ext_repositories_to_sync =  [
                             'https://github.com/swisskyrepo/PayloadsAllTheThings',
                             'https://github.com/payloadbox/xss-payload-list',
                             'https://github.com/Cillian-Collins/dirscraper',
