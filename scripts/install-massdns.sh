@@ -9,9 +9,9 @@ ENDCOLOR="\e[0m"
 if [ ! -d "/opt/massdns" ]
 then
     echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing massdns"
-    cd /opt
-    sudo git clone https://github.com/blechschmidt/massdns
+    git clone https://github.com/blechschmidt/massdns /opt/massdns
     cd /opt/massdns
     sudo make
     sudo ln -s /opt/massdns/bin/massdns /usr/local/bin/massdns
+    cd - 1>/dev/null
 fi
