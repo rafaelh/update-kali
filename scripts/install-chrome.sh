@@ -20,3 +20,5 @@ then
     sudo dpkg -i google-chrome-stable_current_amd64.deb
     rm -rf google-chrome-stable_current_amd64.deb
 fi
+
+# Updates are handled by the APT repository chrome installs.
