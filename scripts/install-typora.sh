@@ -19,3 +19,5 @@ then
     sudo apt update
     sudo apt install typora
 fi
+
+# Updates are handled by the APT repository installed by Typora.

@@ -24,3 +24,5 @@ then
     sudo apt update -y
     sudo apt install -y code
 fi
+
+# Updates are handled by the APT repository installed by vscode.
