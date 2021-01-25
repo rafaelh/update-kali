@@ -1,7 +1,7 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/rafaelh/update-kali.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/rafaelh/update-kali/context:python) [![Twitter](https://img.shields.io/badge/twitter-@rafael_hart-blue.svg)](https://twitter.com/rafael_hart)
 
 # update-kali
-Scripts to set up Kali Linux with additional tools, and maintain them.
+Scripts to set up Kali Linux with additional tools, and maintain them. You can also use this script with other debian-based distros like Ubuntu.
 
 ![Image of update-kali script running](update-kali.gif)
 

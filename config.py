@@ -73,7 +73,8 @@ if 'Ubuntu' in release:
     packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'golang', 'exif',
                            'hexedit', 'jq', 'python3-pip', 'python3-venv', 'python3-shodan',
                            'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
-                           'tmux', 'bash-completion', 'ruby-full', 'nbtscan', 'tree', 'grc']
+                           'tmux', 'bash-completion', 'ruby-full', 'nbtscan', 'tree', 'grc',
+                           'john']
 
     # These Ubuntu packages will be removed
     packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
@@ -95,8 +96,7 @@ if 'Ubuntu' in release:
                                 'github.com/lc/gau',
                                 'github.com/hakluke/hakrawler',
                                 'github.com/hahwul/dalfox',
-                                'github.com/ffuf/ffuf',
-                                'github.com/zricethezav/gitleaks',
+                                'github.com/ffuf/ffuf'
                                 ]
 
     # These git repositories will be synced to the 'external repo' directory
