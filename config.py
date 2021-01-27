@@ -6,7 +6,6 @@ import subprocess
 # Determine release, so that we can set different things for different distributions
 release = subprocess.check_output("""sh -c '. /etc/os-release; echo "$NAME"'""", shell=True,
     universal_newlines=True).strip()
-print("Release is: " + release)
 
 if 'Kali' in release:
     # These directories will be removed from your home directory
@@ -17,8 +16,8 @@ if 'Kali' in release:
                            'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
                            'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
                            'tmux', 'steghide', 'bash-completion', 'ieee-data', 'python3-netaddr',
-                           'ruby-full', 'powercat', 'twofi', 'cewl', 'nbtscan',
-                           'tree', 'upx-ucl', 'exe2hexbat', 'shellter', 'grc']
+                           'ruby-full', 'powercat', 'cewl', 'nbtscan', 'tree', 'upx-ucl',
+                           'exe2hexbat', 'shellter', 'grc']
 
     # These kali packages will be removed
     packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
