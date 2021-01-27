@@ -1,4 +1,7 @@
 #!/bin/bash
+set -Eeuo pipefail
+trap "echo -e \"\033[1;31m[!] \e[0m Script error occured.\"" ERR
+
 GREEN="\033[1;32m"
 ENDCOLOR="\e[0m"
 
