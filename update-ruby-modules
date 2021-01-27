@@ -1,9 +1,12 @@
 #!/bin/bash
-GREEN="\033[1;32m"
+set -Eeuo pipefail
+trap "echo -e \"\033[1;31m[!] \e[0m Script error occured.\"" ERR
+
+BLUE="\033[1;34m"
 ENDCOLOR="\e[0m"
 
 echo
-echo -ne $GREEN">>> "$ENDCOLOR; echo "Checking for outdated Ruby Gems"
+echo -ne $BLUE"[i] "$ENDCOLOR; echo "Checking for outdated Ruby Gems"
 echo
 gem outdated
 echo
