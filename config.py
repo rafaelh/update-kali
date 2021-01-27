@@ -104,7 +104,6 @@ if 'Ubuntu' in release:
     ext_repositories_to_sync =  [
                                 'https://github.com/danielmiessler/SecLists',
                                 'https://github.com/swisskyrepo/PayloadsAllTheThings',
-                                'https://github.com/darkoperator/dnsrecon'
                                 ]
 
     # These git repositories will be synced to the 'personal repo' directory. I use my home directory.
