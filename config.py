@@ -25,7 +25,7 @@ if 'Kali' in release:
                            'exe2hexbat', 'shellter', 'grc']
 
     # These kali packages will be removed
-    packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
+    packages_to_remove = []
 
     # These python packages will be installed globally
     pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker']
