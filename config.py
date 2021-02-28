@@ -70,22 +70,20 @@ if 'Kali' in release:
     # without causing problems.
 
 if 'Ubuntu' in release and not are_we_on_wsl:
-    sys.exit(1)
     # These directories will be removed from your home directory
     directories_to_remove = ['Documents', 'Music', 'Pictures', 'Public', 'Templates', 'Videos']
 
     # These Ubuntu packages will be installed
     packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'golang', 'exif',
-                           'hexedit', 'jq', 'python3-pip', 'python3-venv', 'python3-shodan',
-                           'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
-                           'tmux', 'bash-completion', 'ruby-full', 'nbtscan', 'tree', 'grc',
-                           'john']
+                           'hexedit', 'jq', 'python3-pip', 'python3-venv', 'apt-transport-https', 
+                           'curl', 'filezilla', 'meld', 'ncat', 'net-tools', 'tmux', 
+                           'bash-completion', 'ruby-full', 'nbtscan', 'tree', 'grc', 'john']
 
     # These Ubuntu packages will be removed
-    packages_to_remove = ['zsh', 'zsh-syntax-highlighting', 'zsh-autosuggestions']
+    packages_to_remove = []
 
     # These python packages will be installed globally
-    pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker']
+    pip_packages = ['pipenv', 'pylint', 'stegcracker']
 
     # These gem packages will be installed globally
     gem_packages = ['wpscan']
@@ -97,18 +95,14 @@ if 'Ubuntu' in release and not are_we_on_wsl:
     # export GOPATH=$HOME/go
     # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
     golang_modules_to_install = [
-                                'github.com/projectdiscovery/subfinder/cmd/subfinder',
                                 'github.com/lc/gau',
                                 'github.com/hakluke/hakrawler',
                                 'github.com/hahwul/dalfox',
-                                'github.com/ffuf/ffuf'
                                 ]
 
     # These git repositories will be synced to the 'external repo' directory
     external_tools_directory = '/opt'
     ext_repositories_to_sync =  [
-                                'https://github.com/danielmiessler/SecLists',
-                                'https://github.com/swisskyrepo/PayloadsAllTheThings',
                                 ]
 
     # These git repositories will be synced to the 'personal repo' directory. I use my home directory.
