@@ -83,7 +83,7 @@ if 'Ubuntu' in release and not are_we_on_wsl:
     packages_to_remove = []
 
     # These python packages will be installed globally
-    pip_packages = ['pipenv', 'pylint', 'stegcracker']
+    pip_packages = ['pipenv', 'pylint', 'stegcracker', 'truffleHog']
 
     # These gem packages will be installed globally
     gem_packages = ['wpscan']
