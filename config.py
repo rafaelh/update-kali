@@ -40,7 +40,6 @@ if 'Kali' in release:
     # export GOPATH=$HOME/go
     # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
     golang_modules_to_install = [
-                                'github.com/projectdiscovery/subfinder/cmd/subfinder',
                                 'github.com/lc/gau',
                                 'github.com/hakluke/hakrawler',
                                 'github.com/hahwul/dalfox',
@@ -51,10 +50,6 @@ if 'Kali' in release:
     external_tools_directory = '/opt'
     ext_repositories_to_sync =  [
                                 'https://github.com/swisskyrepo/PayloadsAllTheThings',
-                                'https://github.com/payloadbox/xss-payload-list',
-                                'https://github.com/Cillian-Collins/dirscraper',
-                                'https://github.com/maurosoria/dirsearch',
-                                'https://github.com/darkoperator/dnsrecon'
                                 ]
 
     # These git repositories will be synced to the 'personal repo' directory. I use my home directory.
@@ -75,8 +70,8 @@ if 'Ubuntu' in release and not are_we_on_wsl:
 
     # These Ubuntu packages will be installed
     packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'golang', 'exif',
-                           'hexedit', 'jq', 'python3-pip', 'python3-venv', 'apt-transport-https', 
-                           'curl', 'filezilla', 'meld', 'ncat', 'net-tools', 'tmux', 
+                           'hexedit', 'jq', 'python3-pip', 'python3-venv', 'apt-transport-https',
+                           'curl', 'filezilla', 'meld', 'ncat', 'net-tools', 'tmux',
                            'bash-completion', 'ruby-full', 'nbtscan', 'tree', 'grc', 'john']
 
     # These Ubuntu packages will be removed
