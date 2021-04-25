@@ -10,6 +10,11 @@ if [ -f /mnt/c/Windows/System32/wsl.exe ]; then
     exit 0
 fi
 
+# === Exit without proceeding if run on a non-Kali distro ===
+if ! grep -Fxvq "kali-rolling" /etc/debian_version; then
+    exit 0
+fi
+
 # Check if autorecon is installed
 if ! command -v autorecon &> /dev/null
 then

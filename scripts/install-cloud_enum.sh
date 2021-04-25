@@ -10,6 +10,11 @@ if [ -f /mnt/c/Windows/System32/wsl.exe ]; then
     exit 0
 fi
 
+# === Exit without proceeding if run on a non-Kali distro ===
+if ! grep -Fxvq "kali-rolling" /etc/debian_version; then
+    exit 0
+fi
+
 # Check if cloud_enum is installed
 if [ ! -d "/opt/cloud_enum" ]
 then
