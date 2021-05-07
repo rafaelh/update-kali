@@ -1,2 +1,2 @@
 #!/bin/bash
-/vagrant/update-kali
+sudo /vagrant/update-kali skip-update
