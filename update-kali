@@ -18,15 +18,16 @@ def main():
     if elevate_privileges(): sys.exit(1)
 
     # Sync the script with Github version
-    print_message("blue", "Syncing 'update-kali' script")
-    script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
-                                          "pull", "origin", "main", "--ff-only"], stdout=subprocess.PIPE)
-    script_git_status_output = script_git_status.communicate()[0]
-    if "Already up to date" not in script_git_status_output.decode():
-        print_message("error", "Script Updated. Please run the new version.\n")
-        if os.path.exists("/vagrant"):
-            print_message("info", "Once updated, this script can be rerun with 'vagrant provision'")
-        sys.exit(1)
+    if not sys.argv[1] == 'skip-update':
+        print_message("blue", "Syncing 'update-kali' script")
+        script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
+                                              "pull", "origin", "main", "--ff-only"], stdout=subprocess.PIPE)
+        script_git_status_output = script_git_status.communicate()[0]
+        if "Already up to date" not in script_git_status_output.decode():
+            print_message("error", "Script Updated. Please run the new version.\n")
+            if os.path.exists("/vagrant"):
+                print_message("info", "Once updated, this script can be rerun with 'vagrant provision'")
+            sys.exit(1)
 
     # Update and upgrade apt packages
     print_message("blue", "General Update")
