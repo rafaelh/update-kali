@@ -63,3 +63,8 @@ then
     rm -rf google-chrome-stable_current_amd64.deb
 fi
 ```
+
+# Using `update-kali` with vagrant
+Another way this script can be useful is in concern with vagrant, which will allow you to create a fresh kali vm, configured as you want with a simple `vagrant up`. Fresh kali box for every engagement? No problem.
+
+https://stackoverflow.com/questions/14715678/vagrant-insecure-by-default/14719184
