@@ -17,14 +17,14 @@ def main():
     # Get sudo privileges
     if elevate_privileges(): sys.exit(1)
 
-    # Sync the script with Github version, unless running under vagrant
+    # Sync the script with Github version
     print_message("blue", "Syncing 'update-kali' script")
     script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
                                           "pull", "origin", "main", "--ff-only"], stdout=subprocess.PIPE)
     script_git_status_output = script_git_status.communicate()[0]
     if "Already up to date" not in script_git_status_output.decode():
         print_message("error", "Script Updated. Please run the new version.\n")
-        if os.exists("/vagrant"):
+        if os.path.exists("/vagrant"):
             print_message("info", "Once updated, this script can be rerun with 'vagrant provision'")
         sys.exit(1)
 
