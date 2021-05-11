@@ -22,13 +22,13 @@ if 'Kali' in release:
                            'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
                            'tmux', 'steghide', 'bash-completion', 'ieee-data', 'python3-netaddr',
                            'ruby-full', 'powercat', 'cewl', 'nbtscan', 'tree', 'upx-ucl',
-                           'exe2hexbat', 'shellter', 'grc']
+                           'exe2hexbat', 'shellter', 'grc', 'apktool']
 
     # These kali packages will be removed
     packages_to_remove = []
 
     # These python packages will be installed globally
-    pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker', 'truffleHog']
+    pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker', 'truffleHog', 'apkleaks']
 
     # These gem packages will be installed globally
     gem_packages = ['wpscan']
