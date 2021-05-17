@@ -68,7 +68,6 @@ def main():
     # Sync git repositories
     print_message("blue", "Syncing git repositories")
     for repo in personal_repositories_to_sync:
-        #sync_git_repo(repo.replace(".git", ""), personal_repo_directory)
         sync_git_repo(repo, personal_repo_directory)
     for repo in ext_repositories_to_sync:
         sync_git_repo(repo, external_tools_directory)
