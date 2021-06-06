@@ -17,6 +17,8 @@ from config import (personal_repo_directory, external_tools_directory, directori
 def main():
     argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
     argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
+    argument_parser.add_argument("-s", "--noscripts", help="Don't run scripts", action="store_true")
+    argument_parser.add_argument("-r", "--noreposync", help="Don't sync git repos", action="store_true")
     argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
     argument_parser.add_argument("-g", "--gems", help="Update ruby gem packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
@@ -85,15 +87,17 @@ def main():
         remove_directory(directory)
 
     # Sync git repositories
-    print_message("blue", "Syncing git repositories")
-    for repo in personal_repositories_to_sync:
-        sync_git_repo(repo, personal_repo_directory)
-    for repo in ext_repositories_to_sync:
-        sync_git_repo(repo, external_tools_directory)
+    if not args.noreposync:
+        print_message("blue", "Syncing git repositories")
+        for repo in personal_repositories_to_sync:
+            sync_git_repo(repo, personal_repo_directory)
+        for repo in ext_repositories_to_sync:
+            sync_git_repo(repo, external_tools_directory)
 
     # Run *.sh and *.py files in the /scripts directory
-    print_message("blue", "Running scripts")
-    run_scripts()
+    if not args.noscripts:
+        print_message("blue", "Running scripts")
+        run_scripts()
 
     print("\nAll done. Go break stuff.\n")
 
