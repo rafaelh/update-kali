@@ -30,9 +30,9 @@ if 'Kali' in release:
     # These python packages will be installed globally
     pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker', 'truffleHog', 'apkleaks']
 
-    # Should pip packages be updated if there are newer versions? Setting this to yes is a good way
+    # Should pip packages be updated if there are newer versions? Setting this to True is a good way
     # of breaking all your python scripts that don't use virtual environments.
-    update_pip_packages = "yes"
+    update_pip = True
 
     # These gem packages will be installed globally
     gem_packages = ['wpscan']

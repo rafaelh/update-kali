@@ -11,7 +11,7 @@ from updateactions import (print_message, elevate_privileges, take_ownership, up
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
-                    personal_repositories_to_sync, update_pip_packages)
+                    personal_repositories_to_sync, update_pip)
 
 def main():
     # Run checks
@@ -45,7 +45,7 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
-    if update_pip_packages == "yes": update_pip_packages()
+    if update_pip: update_pip_packages()
 
     # Install gem packages
     if not apt_cache["ruby-rubygems"].is_installed:
