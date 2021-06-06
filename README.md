@@ -3,7 +3,16 @@
 # update-kali
 This is a tool to set up Kali Linux quickly with additional packages and maintain them over time. You can also use this script with other debian-based distros like Ubuntu.
 
+- [Usage](#Usage)
+- [About](#About)
+- [Config](#Config)
+- [Optional Arguments](Optional-Arguments)
+- [Using-with-vagrant](Using-with-Vagrant)
+
 ![Image of update-kali script running](update-kali.gif)
+
+
+# Usage
 
 ```
 $ update-kali -h
@@ -18,7 +27,7 @@ optional arguments:
   -f, --full      Do all optional updates
 ```
 
-## What is this?
+## About
 I need to keep a group of Kali linux boxes up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. It's set up for my personal use, but with a little modification you can use it too:
 
 * Fork the repo so that you can commit your changes to `config.py`, and so the script updates from your account fork in future
@@ -26,7 +35,7 @@ I need to keep a group of Kali linux boxes up to date, and I like them to be set
 * Go through `/scripts/`, delete the ones you don't want, and add any of your own that you want to run.
 * Make sure you have the following installed: `python3`, `python-apt` and `git`. These are all installed by default on the standard kali.
 
-If you set up Kali vms freqently, such as for different engagements, skip to the end of this document and consider using this script with [vagrant](https://www.vagrantup.com/).
+If you set up Kali VMs frequently, such as for different engagements, skip to the end of this document and consider using this script with [vagrant](https://www.vagrantup.com/).
 
 ## Config
 The default config can be found in `config.py`. You should updated it to match what you want, otherwise you'll use my preferences and calamity will ensue. This script will:
@@ -79,8 +88,8 @@ then
 fi
 ```
 
-# Using `update-kali` with vagrant
-Another way this script can be useful is in concern with vagrant, which will allow you to create a fresh kali vm, configured as you want with a simple `vagrant up`. Fresh kali box for every engagement? No problem.
+# Using with Vagrant
+Another way this script can be useful is in concern with [Vagrant](https://www.vagrantup.com/), which will allow you to create a fresh kali vm, configured as you want with a simple `vagrant up`. Fresh kali box for every engagement? No problem.
 
 1. Install [vagrant](https://www.vagrantup.com/)
 2. Fork the repo so that you can commit your changes to `config.py`, and so the script updates from your account fork in future
