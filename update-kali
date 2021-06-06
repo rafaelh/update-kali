@@ -15,12 +15,14 @@ from config import (personal_repo_directory, external_tools_directory, directori
                     personal_repositories_to_sync)
 
 def main():
-    argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
+    argument_parser = argparse.ArgumentParser(description="update-kali is a tool for rapidly configuring Kali linux " +
+                                             "with additional packages, git repositories and other tools, and " +
+                                             "maintaining them over time.")
     argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
     argument_parser.add_argument("-s", "--noscripts", help="Don't run scripts", action="store_true")
     argument_parser.add_argument("-r", "--noreposync", help="Don't sync git repos", action="store_true")
-    argument_parser.add_argument("-p", "--pip", help="Update all currently installed python pip packages", action="store_true")
-    argument_parser.add_argument("-g", "--gems", help="Update all currently installed ruby gem packages", action="store_true")
+    argument_parser.add_argument("-p", "--pip", help="Update all installed python pip packages", action="store_true")
+    argument_parser.add_argument("-g", "--gems", help="Update all installed ruby gem packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
     args = argument_parser.parse_args()
 

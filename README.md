@@ -18,15 +18,15 @@ This is a tool to set up Kali Linux quickly with additional packages and maintai
 $ update-kali -h
 usage: update-kali [-h] [-n] [-s] [-r] [-p] [-g] [-f]
 
-Arguments for the update-kali tool
+update-kali is a tool for rapidly configuring Kali linux with additional packages, git repositories and other tools, and maintaining them over time.
 
 optional arguments:
   -h, --help        show this help message and exit
   -n, --noupdate    Don't check for an updated script
   -s, --noscripts   Don't run scripts
   -r, --noreposync  Don't sync git repos
-  -p, --pip         Update all currently installed python pip packages
-  -g, --gems        Update all currently installed ruby gem packages
+  -p, --pip         Update all installed python pip packages
+  -g, --gems        Update all installed ruby gem packages
   -f, --full        Do all optional updates
 ```
 
