@@ -4,6 +4,7 @@ import os
 import apt
 import subprocess
 import sys
+import argparse
 from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
                            install_package, remove_package, pip_package_install,gem_package_install,
                            install_golang_module, create_directory, remove_directory, sync_git_repo,
@@ -11,9 +12,14 @@ from updateactions import (print_message, elevate_privileges, take_ownership, up
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
-                    personal_repositories_to_sync, update_pip)
+                    personal_repositories_to_sync)
 
 def main():
+    argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
+    argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
+    argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
+    args = argument_parser.parse_args()
+
     # Run checks
     if not os.getenv("GOROOT"): print_message("error", "GOROOT not set. Add 'export GOROOT=/usr/lib/go' to your .bashrc")
     if not os.getenv("GOPATH"): print_message("error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc")
@@ -45,7 +51,7 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
-    if update_pip: update_pip_packages()
+    if args.pip or args.full: update_pip_packages()
 
     # Install gem packages
     if not apt_cache["ruby-rubygems"].is_installed:
