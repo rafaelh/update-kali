@@ -30,12 +30,17 @@ if 'Kali' in release:
     # These python packages will be installed globally
     pip_packages = ['pipenv', 'pylint', 'dnsgen', 'stegcracker', 'truffleHog', 'apkleaks']
 
+    # Should pip packages be updated if there are newer versions? Setting this to yes is a good way
+    # of breaking all your python scripts that don't use virtual environments.
+    update_pip_packages = "yes"
+
     # These gem packages will be installed globally
     gem_packages = ['wpscan']
 
     # These go tools will be installed globally. You will need to have the following settings in your
     # .bashrc already:
     #
+
     # export GOROOT=/usr/lib/go
     # export GOPATH=$HOME/go
     # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH

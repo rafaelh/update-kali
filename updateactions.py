@@ -52,6 +52,11 @@ def pip_package_install(pip_packages, installed_pip_packages):
             cmdstring = "sudo pip3 install --upgrade " + package
             os.system(cmdstring)
 
+def update_pip_packages():
+    """ Update pip packages """
+    cmdstring = "pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 2>/dev/null; break"
+    os.system(cmdstring)
+
 def gem_package_install(gem_packages, installed_gem_packages):
     """ Install Ruby gem package """
     for package in gem_packages:

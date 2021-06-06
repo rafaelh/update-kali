@@ -7,14 +7,16 @@ import sys
 from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
                            install_package, remove_package, pip_package_install,gem_package_install,
                            install_golang_module, create_directory, remove_directory, sync_git_repo,
-                           run_scripts)
+                           run_scripts, update_pip_packages)
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
-                    personal_repositories_to_sync)
+                    personal_repositories_to_sync, update_pip_packages)
 
 def main():
-    # Get sudo privileges
+    # Run checks
+    if not os.getenv("GOROOT"): print_message("error", "GOROOT not set. Add 'export GOROOT=/usr/lib/go' to your .bashrc")
+    if not os.getenv("GOPATH"): print_message("error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc")
     if elevate_privileges(): sys.exit(1)
 
     # Sync the script with Github version
@@ -43,8 +45,11 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
+    if update_pip_packages == "yes": update_pip_packages()
 
     # Install gem packages
+    if not apt_cache["ruby-rubygems"].is_installed:
+        print_message("error", "")
     print_message("blue", "Checking ruby gems")
     gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
     installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
@@ -54,9 +59,12 @@ def main():
     take_ownership(external_tools_directory)
 
     # Install golang tools
-    print_message("blue", "Checking golang modules")
-    for module in golang_modules_to_install:
-        install_golang_module(module)
+    if not apt_cache["golang"].is_installed:
+        print_message("error", "Golang not installed, skipping go module checks")
+    else:
+        print_message("blue", "Checking golang modules")
+        for module in golang_modules_to_install:
+            install_golang_module(module)
 
     # Create and remove specified directories
     print_message("blue", "Checking directory structure")
