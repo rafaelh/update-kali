@@ -5,6 +5,19 @@ This is a tool to set up Kali Linux quickly with additional packages and maintai
 
 ![Image of update-kali script running](update-kali.gif)
 
+```
+$ update-kali -h
+usage: update-kali [-h] [-n] [-p] [-f]
+
+Arguments for the update-kali tool
+
+optional arguments:
+  -h, --help      show this help message and exit
+  -n, --noupdate  Don't check for an updated script
+  -p, --pip       Update python pip packages
+  -f, --full      Do all optional updates
+```
+
 ## What is this?
 I need to keep a group of Kali linux boxes up to date, and I like them to be setup in a similar format. This script installs the tools I'm likely to use, creates directories, etc. It's set up for my personal use, but with a little modification you can use it too:
 
