@@ -7,7 +7,7 @@ This is a tool to set up Kali Linux quickly with additional packages and maintai
 - [About](#About)
 - [Config](#Config)
 - [Optional Arguments](#Optional-arguments)
-- [Using-with-vagrant](#Using-with-vagrant)
+- [Using with Vagrant](#Using-with-vagrant)
 
 ![Image of update-kali script running](update-kali.gif)
 
