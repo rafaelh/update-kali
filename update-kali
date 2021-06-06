@@ -16,6 +16,7 @@ from config import (personal_repo_directory, external_tools_directory, directori
 
 def main():
     argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
+    argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
     argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
     args = argument_parser.parse_args()
@@ -26,13 +27,14 @@ def main():
     if elevate_privileges(): sys.exit(1)
 
     # Sync the script with Github version
-    print_message("blue", "Syncing 'update-kali' script")
-    script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
-                                          "pull", "origin", "main"], stdout=subprocess.PIPE)
-    script_git_status_output = script_git_status.communicate()[0]
-    if "Already up to date" not in script_git_status_output.decode():
-        print_message("error", "Script Updated. Please run the new version.\n")
-        sys.exit(1)
+    if not args.noupdate:
+        print_message("blue", "Syncing 'update-kali' script")
+        script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
+                                              "pull", "origin", "main"], stdout=subprocess.PIPE)
+        script_git_status_output = script_git_status.communicate()[0]
+        if "Already up to date" not in script_git_status_output.decode():
+            print_message("error", "Script Updated. Please run the new version.\n")
+            sys.exit(1)
 
     # Update and upgrade apt packages
     print_message("blue", "General Update")
