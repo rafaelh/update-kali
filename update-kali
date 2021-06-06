@@ -4,27 +4,37 @@ import os
 import apt
 import subprocess
 import sys
+import argparse
 from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
                            install_package, remove_package, pip_package_install,gem_package_install,
                            install_golang_module, create_directory, remove_directory, sync_git_repo,
-                           run_scripts)
+                           run_scripts, update_pip_packages)
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
                     personal_repositories_to_sync)
 
 def main():
-    # Get sudo privileges
+    argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
+    argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
+    argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
+    argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
+    args = argument_parser.parse_args()
+
+    # Run checks
+    if not os.getenv("GOROOT"): print_message("error", "GOROOT not set. Add 'export GOROOT=/usr/lib/go' to your .bashrc")
+    if not os.getenv("GOPATH"): print_message("error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc")
     if elevate_privileges(): sys.exit(1)
 
     # Sync the script with Github version
-    print_message("blue", "Syncing 'update-kali' script")
-    script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
-                                          "pull", "origin", "main"], stdout=subprocess.PIPE)
-    script_git_status_output = script_git_status.communicate()[0]
-    if "Already up to date" not in script_git_status_output.decode():
-        print_message("error", "Script Updated. Please run the new version.\n")
-        sys.exit(1)
+    if not args.noupdate:
+        print_message("blue", "Syncing 'update-kali' script")
+        script_git_status = subprocess.Popen(["git", "-C", os.path.dirname(os.path.realpath(__file__)),
+                                              "pull", "origin", "main"], stdout=subprocess.PIPE)
+        script_git_status_output = script_git_status.communicate()[0]
+        if "Already up to date" not in script_git_status_output.decode():
+            print_message("error", "Script Updated. Please run the new version.\n")
+            sys.exit(1)
 
     # Update and upgrade apt packages
     print_message("blue", "General Update")
@@ -43,8 +53,11 @@ def main():
     installed_pip_packages = [r.decode().split('==')[0] for r in \
         subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
     pip_package_install(pip_packages, installed_pip_packages)
+    if args.pip or args.full: update_pip_packages()
 
     # Install gem packages
+    if not apt_cache["ruby-rubygems"].is_installed:
+        print_message("error", "")
     print_message("blue", "Checking ruby gems")
     gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
     installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
@@ -54,9 +67,12 @@ def main():
     take_ownership(external_tools_directory)
 
     # Install golang tools
-    print_message("blue", "Checking golang modules")
-    for module in golang_modules_to_install:
-        install_golang_module(module)
+    if not apt_cache["golang"].is_installed:
+        print_message("error", "Golang not installed, skipping go module checks")
+    else:
+        print_message("blue", "Checking golang modules")
+        for module in golang_modules_to_install:
+            install_golang_module(module)
 
     # Create and remove specified directories
     print_message("blue", "Checking directory structure")

@@ -36,6 +36,7 @@ if 'Kali' in release:
     # These go tools will be installed globally. You will need to have the following settings in your
     # .bashrc already:
     #
+
     # export GOROOT=/usr/lib/go
     # export GOPATH=$HOME/go
     # export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
