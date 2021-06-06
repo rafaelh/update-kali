@@ -19,8 +19,8 @@ def main():
     argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
     argument_parser.add_argument("-s", "--noscripts", help="Don't run scripts", action="store_true")
     argument_parser.add_argument("-r", "--noreposync", help="Don't sync git repos", action="store_true")
-    argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
-    argument_parser.add_argument("-g", "--gems", help="Update ruby gem packages", action="store_true")
+    argument_parser.add_argument("-p", "--pip", help="Update all currently installed python pip packages", action="store_true")
+    argument_parser.add_argument("-g", "--gems", help="Update all currently installed ruby gem packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
     args = argument_parser.parse_args()
 
