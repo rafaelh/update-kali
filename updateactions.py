@@ -65,6 +65,11 @@ def gem_package_install(gem_packages, installed_gem_packages):
             cmdstring = "sudo gem install " + package
             os.system(cmdstring)
 
+def update_gems():
+    """ Update gem packages """
+    cmdstring = "gem outdated >/dev/null; gem update"
+    os.system(cmdstring)
+
 def install_golang_module(module):
     """ Install the specified Golang module """
     modulename = module.split("/")[-1].lower()
