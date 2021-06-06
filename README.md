@@ -41,13 +41,13 @@ The default config can be found in `config.py`. You should updated it to match w
 
 **Note:** This script will change the ownership of your tools directory, which is `/opt` by default, to your user so that you aren't building with sudo privileges. Change the tools directory if you don't want that to happen.
 
-## Supporting Scripts
+## Optional Arguments
 
 ### Updating Go modules
 The Go modules you install will most likely keep on getting worked on, but you'll only get the benefit of those once you update and recompile the associated repository. This takes a long time, so I've added a separate command `update-go-modules` that iterates through updating them.
 
 ### Updating Python modules
-You can update all python pip modules across the system using `update-python-modules`. Be aware that this may introduce breaking changes for your Python scripts, which is why venv is your friend. Expect to get errors when you run this, since some packages are supplied by the system.
+If you run the tool with `-p` or `--pip`, it will update all python pip modules for your user. Be aware that this may introduce breaking changes for your Python scripts that aren't in [virtual environments](https://docs.python.org/3/library/venv.html).
 
 ### Updating Ruby Gems
 As above, you can update all ruby gems with `update-ruby-gems`. This basically runs `gem outdated; gem update`, but it seemed consistent to put it into a script.
