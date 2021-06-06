@@ -16,7 +16,7 @@ This is a tool to set up Kali Linux quickly with additional packages and maintai
 
 ```
 $ update-kali -h
-usage: update-kali [-h] [-n] [-p] [-f]
+usage: update-kali [-h] [-n] [-p] [-g] [-f]
 
 Arguments for the update-kali tool
 
@@ -24,6 +24,7 @@ optional arguments:
   -h, --help      show this help message and exit
   -n, --noupdate  Don't check for an updated script
   -p, --pip       Update python pip packages
+  -g, --gems      Update ruby gem packages
   -f, --full      Do all optional updates
 ```
 
@@ -59,7 +60,7 @@ The Go modules you install will most likely keep on getting worked on, but you'l
 If you run the tool with `-p` or `--pip`, it will update all python pip modules for your user. Be aware that this may introduce breaking changes for your Python scripts that aren't in [virtual environments](https://docs.python.org/3/library/venv.html).
 
 ### Updating Ruby Gems
-As above, you can update all ruby gems with `update-ruby-gems`. This basically runs `gem outdated; gem update`, but it seemed consistent to put it into a script.
+As above, you can update all ruby gems with `-g` or `--gems`.
 
 ## Shell Scripts
 Lastly, this tool will run each of the `.sh` or `.py` files in the `scripts` directory. If you add a script to this directory, make sure they can be run multiple times without causing a problem. You can use the following script that installs Google Chrome as a template:

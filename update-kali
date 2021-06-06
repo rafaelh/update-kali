@@ -8,7 +8,7 @@ import argparse
 from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
                            install_package, remove_package, pip_package_install,gem_package_install,
                            install_golang_module, create_directory, remove_directory, sync_git_repo,
-                           run_scripts, update_pip_packages)
+                           run_scripts, update_pip_packages, update_gems)
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
@@ -18,6 +18,7 @@ def main():
     argument_parser = argparse.ArgumentParser(description='Arguments for the update-kali tool')
     argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
     argument_parser.add_argument("-p", "--pip", help="Update python pip packages", action="store_true")
+    argument_parser.add_argument("-g", "--gems", help="Update ruby gem packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
     args = argument_parser.parse_args()
 
@@ -57,11 +58,13 @@ def main():
 
     # Install gem packages
     if not apt_cache["ruby-rubygems"].is_installed:
-        print_message("error", "")
-    print_message("blue", "Checking ruby gems")
-    gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
-    installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
-    gem_package_install(gem_packages, installed_gem_packages)
+        print_message("error", "Rubygems not installed, skipping gem checks")
+    else:
+        print_message("blue", "Checking ruby gems")
+        gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
+        installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
+        gem_package_install(gem_packages, installed_gem_packages)
+        if args.gems or args.full: update_gems
 
     # Take ownership of the external tools directory
     take_ownership(external_tools_directory)

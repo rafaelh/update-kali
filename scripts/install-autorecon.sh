@@ -25,5 +25,3 @@ then
     echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing Autorecon"
     python3 -m pip install git+https://github.com/Tib3rius/AutoRecon.git
 fi
-
-# Updates will be handled by the update-python-modules script.
