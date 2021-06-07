@@ -61,7 +61,7 @@ def main():
     if args.pip or args.full: update_pip_packages()
 
     # Install gem packages
-    if not apt_cache["ruby-rubygems"].is_installed:
+    if not os.path.exists('/usr/bin/gem'):
         print_message("error", "Rubygems not installed, skipping gem checks")
     else:
         print_message("blue", "Checking ruby gems")
@@ -74,7 +74,7 @@ def main():
     take_ownership(external_tools_directory)
 
     # Install golang tools
-    if not apt_cache["golang"].is_installed:
+    if not os.path.exists('/usr/bin/go'):
         print_message("error", "Golang not installed, skipping go module checks")
     else:
         print_message("blue", "Checking golang modules")
