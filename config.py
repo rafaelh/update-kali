@@ -1,6 +1,5 @@
 import os
 import subprocess
-import sys
 
 ''' This file defines what the update-kali script should do. '''
 
