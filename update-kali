@@ -68,7 +68,7 @@ def main():
         gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
         installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
         gem_package_install(gem_packages, installed_gem_packages)
-        if args.gems or args.full: update_gems
+        if args.gems or args.full: update_gems()
 
     # Take ownership of the external tools directory
     take_ownership(external_tools_directory)
