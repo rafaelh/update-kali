@@ -75,7 +75,7 @@ def install_golang_module(module):
     modulename = module.split("/")[-1].lower()
     if not os.path.exists("/opt/" + modulename):
         print_message("green", "Installing go module " + modulename)
-        cmdseries = ["sudo -E go get -u " + module,
+        cmdseries = ["GO111MODULE=on go get -v " + module,
                      "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" \
                      + modulename]
         os.environ["GOPATH"] = "/opt/" + modulename

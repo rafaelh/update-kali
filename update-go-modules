@@ -9,7 +9,7 @@ def update_golang_module(module):
     if os.path.exists("/opt/" + modulename):
         print("Updating go module " + modulename)
         os.environ["GOPATH"] = "/opt/" + modulename
-        cmdstring = "sudo -E go get -u " + module
+        cmdstring = "GO111MODULE=on go get -v " + module
         os.system(cmdstring)
 
 if __name__ == '__main__':

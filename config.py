@@ -45,6 +45,7 @@ if 'Kali' in release:
                                 'github.com/hakluke/hakrawler',
                                 'github.com/hahwul/dalfox',
                                 'github.com/ffuf/ffuf',
+                                'github.com/projectdiscovery/nuclei/v2/cmd/nuclei'
                                 ]
 
     # These git repositories will be synced to the 'external repo' directory
