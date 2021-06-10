@@ -18,7 +18,8 @@ This is a tool to set up Kali Linux quickly with additional packages and maintai
 $ update-kali -h
 usage: update-kali [-h] [-n] [-s] [-r] [-p] [-g] [-f]
 
-update-kali is a tool for rapidly configuring Kali linux with additional packages, git repositories and other tools, and maintaining them over time.
+update-kali is a tool for rapidly configuring Kali linux with additional packages, git repositories
+and other tools, and maintaining them over time.
 
 optional arguments:
   -h, --help        show this help message and exit
