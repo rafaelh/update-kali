@@ -70,17 +70,26 @@ def update_gems():
     cmdstring = "gem outdated >/dev/null; gem update"
     os.system(cmdstring)
 
-def install_golang_module(module):
+def install_golang_module(module, golang_install_directory):
     """ Install the specified Golang module """
     modulename = module.split("/")[-1].lower()
-    if not os.path.exists("/opt/" + modulename):
+    if not os.path.exists(golang_install_directory + "/" + modulename):
         print_message("green", "Installing go module " + modulename)
         cmdseries = ["GO111MODULE=on go get -v " + module,
-                     "sudo ln -s /opt/" + modulename + "/bin/" + modulename + " /usr/local/bin/" \
-                     + modulename]
-        os.environ["GOPATH"] = "/opt/" + modulename
+                     "sudo ln -s " + golang_install_directory + "/" + modulename + "/bin/" +
+                     modulename + " /usr/local/bin/" + modulename]
+        os.environ["GOPATH"] = golang_install_directory + "/" + modulename
         for cmdstring in cmdseries:
             os.system(cmdstring)
+
+def update_go_packages(golang_modules_to_install, golang_install_directory):
+    ''' Rebuild all Go modules '''
+    print_message("green", "Rebuilding Go modules")
+    for modulename in golang_modules_to_install:
+        module = modulename.split("/")[-1].lower()
+        os.environ["GOPATH"] = golang_install_directory + "/" + module
+        cmdstring = "GO111MODULE=on go get -v " + modulename
+        os.system(cmdstring)
 
 def create_directory(directory):
     """ Checks if the specified directory exists, and creates it if not """

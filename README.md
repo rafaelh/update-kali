@@ -57,7 +57,7 @@ The default config can be found in `config.py`. You should updated it to match w
 ## Optional Arguments
 
 ### Updating Go modules
-The Go modules you install will most likely keep on getting worked on, but you'll only get the benefit of those once you update and recompile the associated repository. This takes a long time, so I've added a separate command `update-go-modules` that iterates through updating them.
+The Go modules you install will most likely keep on getting worked on, but you'll only get the benefit of those once you update and recompile the associated repository. This can take a while, and introduces load, so Go modules will only be recompiled if the `-G` or `--rebuildgo` flags are used.
 
 ### Updating Python modules
 If you run the tool with `-p` or `--pip`, it will update all python pip modules for your user. Be aware that this may introduce breaking changes for your Python scripts that aren't in [virtual environments](https://docs.python.org/3/library/venv.html).
