@@ -12,7 +12,7 @@ from updateactions import (print_message, elevate_privileges, take_ownership, up
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
-                    personal_repositories_to_sync)
+                    personal_repositories_to_sync, golang_install_directory)
 
 def main():
     argument_parser = argparse.ArgumentParser(description="update-kali is a tool for rapidly configuring Kali linux " +
@@ -81,8 +81,9 @@ def main():
         print_message("blue", "Checking golang modules")
         if not args.rebuildgo:
             for module in golang_modules_to_install:
-                install_golang_module(module)
-        if args.rebuildgo or args.full: update_go_packages(golang_modules_to_install)
+                install_golang_module(module, golang_install_directory)
+        if args.rebuildgo or args.full:
+            update_go_packages(golang_modules_to_install, golang_install_directory)
 
     # Create and remove specified directories
     print_message("blue", "Checking directory structure")
