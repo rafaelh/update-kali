@@ -70,6 +70,7 @@ def update_gems():
     cmdstring = "gem outdated >/dev/null; gem update"
     os.system(cmdstring)
 
+# Needs to use external tools dir
 def install_golang_module(module):
     """ Install the specified Golang module """
     modulename = module.split("/")[-1].lower()
@@ -81,6 +82,16 @@ def install_golang_module(module):
         os.environ["GOPATH"] = "/opt/" + modulename
         for cmdstring in cmdseries:
             os.system(cmdstring)
+
+# Needs to use external tools dir
+def update_go_packages(golang_modules_to_install):
+    ''' Rebuild all Go modules '''
+    print_message("green", "Rebuilding Go modules")
+    for modulename in golang_modules_to_install:
+        module = modulename.split("/")[-1].lower()
+        os.environ["GOPATH"] = "/opt/" + module
+        cmdstring = "GO111MODULE=on go get -v " + modulename
+        os.system(cmdstring)
 
 def create_directory(directory):
     """ Checks if the specified directory exists, and creates it if not """

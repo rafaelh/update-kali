@@ -8,7 +8,7 @@ import argparse
 from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
                            install_package, remove_package, pip_package_install,gem_package_install,
                            install_golang_module, create_directory, remove_directory, sync_git_repo,
-                           run_scripts, update_pip_packages, update_gems)
+                           run_scripts, update_pip_packages, update_gems, update_go_packages)
 from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
                     packages_to_install, packages_to_remove, pip_packages, gem_packages,
                     golang_modules_to_install, ext_repositories_to_sync,
@@ -23,6 +23,7 @@ def main():
     argument_parser.add_argument("-r", "--noreposync", help="Don't sync git repos", action="store_true")
     argument_parser.add_argument("-p", "--pip", help="Update all installed python pip packages", action="store_true")
     argument_parser.add_argument("-g", "--gems", help="Update all installed ruby gem packages", action="store_true")
+    argument_parser.add_argument("-G", "--rebuildgo", help="Rebuild Go packages", action="store_true")
     argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
     args = argument_parser.parse_args()
 
@@ -78,8 +79,10 @@ def main():
         print_message("error", "Golang not installed, skipping go module checks")
     else:
         print_message("blue", "Checking golang modules")
-        for module in golang_modules_to_install:
-            install_golang_module(module)
+        if not args.rebuildgo:
+            for module in golang_modules_to_install:
+                install_golang_module(module)
+        if args.rebuildgo or args.full: update_go_packages(golang_modules_to_install)
 
     # Create and remove specified directories
     print_message("blue", "Checking directory structure")
