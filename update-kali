@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+''' This script updates apt, go, pip and ruby packages. Run with --help for more information '''
 
 import os
 import apt
