@@ -1,7 +1,7 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/rafaelh/update-kali.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/rafaelh/update-kali/context:python) [![Twitter](https://img.shields.io/badge/twitter-@rafael_hart-blue.svg)](https://twitter.com/rafael_hart)
 
 # update-kali
-This is a tool to set up Kali Linux quickly with additional packages and maintain them over time. You can also use this script with other debian-based distros like Ubuntu.
+This is a tool to set up Kali Linux with additional packages and maintain them over time. You can also use this script with other debian-based distros like Ubuntu.
 
 - [Usage](#Usage)
 - [About](#About)
