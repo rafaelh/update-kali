@@ -43,8 +43,7 @@ if 'Kali' in release:
                                 'github.com/lc/gau',
                                 'github.com/hakluke/hakrawler',
                                 'github.com/hahwul/dalfox',
-                                'github.com/ffuf/ffuf',
-                                'github.com/projectdiscovery/nuclei/v2/cmd/nuclei',
+                                'github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest',
                                 'github.com/Shopify/kubeaudit'
                                 ]
 
