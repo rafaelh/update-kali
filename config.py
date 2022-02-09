@@ -3,7 +3,7 @@ import subprocess
 
 ''' This file defines what the update-kali script should do. '''
 
-# Determine release, and whether we are on Windows Subsystem for Linux (WSL) so that we can set 
+# Determine release, and whether we are on Windows Subsystem for Linux (WSL) so that we can set
 # different settings for different environments. Anything common can go outside the if statements.
 
 release = subprocess.check_output("""sh -c '. /etc/os-release; echo "$NAME"'""", shell=True,
@@ -19,9 +19,9 @@ if 'Kali' in release:
     packages_to_install = ['most', 'ttf-mscorefonts-installer', 'pydf', 'htop', 'gobuster', 'amass',
                            'golang', 'exif', 'hexedit', 'jq', 'python3-pip', 'python3-venv',
                            'apt-transport-https', 'curl', 'filezilla', 'meld', 'ncat', 'net-tools',
-                           'tmux', 'steghide', 'bash-completion', 'ieee-data', 'python3-netaddr',
+                           'tmux', 'bash-completion', 'ieee-data', 'python3-netaddr',
                            'ruby-full', 'powercat', 'cewl', 'nbtscan', 'tree', 'upx-ucl',
-                           'exe2hexbat', 'shellter', 'grc', 'apktool']
+                           'exe2hexbat', 'shellter', 'grc']
 
     # These kali packages will be removed
     packages_to_remove = []
