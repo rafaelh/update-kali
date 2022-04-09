@@ -75,11 +75,12 @@ def install_golang_module(module, golang_install_directory):
     modulename = module.split("/")[-1].lower()
     if not os.path.exists(golang_install_directory + "/" + modulename):
         print_message("green", "Installing go module " + modulename)
-        cmdseries = ["GO111MODULE=on go get -v " + module,
+        cmdseries = ["go install " + module,
                      "sudo ln -s " + golang_install_directory + "/" + modulename + "/bin/" +
                      modulename + " /usr/local/bin/" + modulename]
         os.environ["GOPATH"] = golang_install_directory + "/" + modulename
         for cmdstring in cmdseries:
+            print(cmdstring)
             os.system(cmdstring)
 
 def update_go_packages(golang_modules_to_install, golang_install_directory):
@@ -88,7 +89,7 @@ def update_go_packages(golang_modules_to_install, golang_install_directory):
     for modulename in golang_modules_to_install:
         module = modulename.split("/")[-1].lower()
         os.environ["GOPATH"] = golang_install_directory + "/" + module
-        cmdstring = "GO111MODULE=on go get -v " + modulename
+        cmdstring = "go install " + modulename
         os.system(cmdstring)
 
 def create_directory(directory):
