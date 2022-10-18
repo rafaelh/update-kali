@@ -18,7 +18,7 @@ then
     if [ ! -f "/usr/share/wordlists/rockyou_utf8.txt" ]
     then
         echo -ne $GREEN"[+] "$ENDCOLOR; echo "Creating UTF-8 version of rockyou.txt"
-        sudo iconv -f ISO-8859-1 -t UTF-8 /usr/share/wordlists/rockyou.txt > /usr/share/wordlists/rockyou_utf8.txt
+        sudo iconv -f ISO-8859-1 -t UTF-8 /usr/share/wordlists/rockyou.txt > tee /usr/share/wordlists/rockyou_utf8.txt
     fi
 fi
 
