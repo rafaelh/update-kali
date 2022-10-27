@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import string
 from datetime import datetime
 
 def print_message(color, message):
@@ -75,12 +76,11 @@ def install_golang_module(module, golang_install_directory):
     modulename = module.split("/")[-1].lower()
     if not os.path.exists(golang_install_directory + "/" + modulename):
         print_message("green", "Installing go module " + modulename)
-        cmdseries = ["go install " + module,
+        cmdseries = ["go install " + module + "@latest",
                      "sudo ln -s " + golang_install_directory + "/" + modulename + "/bin/" +
                      modulename + " /usr/local/bin/" + modulename]
         os.environ["GOPATH"] = golang_install_directory + "/" + modulename
         for cmdstring in cmdseries:
-            print(cmdstring)
             os.system(cmdstring)
 
 def update_go_packages(golang_modules_to_install, golang_install_directory):
@@ -89,7 +89,7 @@ def update_go_packages(golang_modules_to_install, golang_install_directory):
     for modulename in golang_modules_to_install:
         module = modulename.split("/")[-1].lower()
         os.environ["GOPATH"] = golang_install_directory + "/" + module
-        cmdstring = "go install " + modulename
+        cmdstring = "go install " + modulename + "@latest"
         os.system(cmdstring)
 
 def create_directory(directory):

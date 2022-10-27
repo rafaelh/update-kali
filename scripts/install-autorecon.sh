@@ -19,9 +19,9 @@ fi
 if ! command -v autorecon &> /dev/null
 then
     echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing Autorecon's dependencies"
-    sudo apt install seclists curl enum4linux gobuster nbtscan nikto nmap onesixtyone oscanner \
-                     smbclient smbmap smtp-user-enum snmp sslscan sipvicious tnscmd10g whatweb \
-                     wkhtmltopdf
+    sudo apt install seclists curl dnsrecon enum4linux feroxbuster gobuster \
+    impacket-scripts nbtscan nikto nmap onesixtyone oscanner redis-tools smbclient \
+    smbmap snmp sslscan sipvicious tnscmd10g whatweb wkhtmltopdf
     echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing Autorecon"
     python3 -m pip install git+https://github.com/Tib3rius/AutoRecon.git
 fi
