@@ -50,7 +50,7 @@ def pip_package_install(pip_packages, installed_pip_packages):
     for package in pip_packages:
         if not package in installed_pip_packages:
             print_message("green", "Installing pip package " + package)
-            cmdstring = "sudo pip3 install --upgrade " + package
+            cmdstring = "python3 -m pip install --upgrade " + package
             os.system(cmdstring)
 
 def update_pip_packages():
