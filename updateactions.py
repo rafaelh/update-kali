@@ -101,7 +101,8 @@ def update_pip_packages():
     """Update pip packages"""
     result = subprocess.run(
         ["pip3", "list", "--outdated", "--format=freeze"],
-        capture_output=True, text=True
+        capture_output=True,
+        text=True,
     )
     for line in result.stdout.splitlines():
         if line.startswith("-e"):
