@@ -127,7 +127,7 @@ def run_scripts():
     if os.path.exists(script_directory):
         scripts = sorted(os.listdir(script_directory))
         for script in scripts:
-            if '.sh' or '.py' in script:
+            if script.endswith('.sh') or script.endswith('.py'):
                 cmdstring = script_directory + '/' + script
                 os.system(cmdstring)
     else:
