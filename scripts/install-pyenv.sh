@@ -30,5 +30,4 @@ then
                         tk-dev libffi-dev liblzma-dev python3-openssl git
     echo -ne $GREEN"[+] "$ENDCOLOR; echo "Installing pyenv"
     curl https://pyenv.run | bash
-    pyenv install 2.7.18
 fi

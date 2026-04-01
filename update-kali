@@ -77,7 +77,15 @@ def main():
     argument_parser.add_argument(
         "-f", "--full", help="Do all optional updates", action="store_true"
     )
+    argument_parser.add_argument(
+        "-d",
+        "--dryrun",
+        help="Show what would be done without making changes",
+        action="store_true",
+    )
     args = argument_parser.parse_args()
+
+    dry_run = args.dryrun
 
     # Run checks
     if not os.getenv("GOROOT"):
@@ -88,7 +96,9 @@ def main():
         print_message(
             "error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc"
         )
-    if elevate_privileges():
+    if dry_run:
+        print_message("blue", "DRY RUN - no changes will be made\n")
+    if not dry_run and elevate_privileges():
         sys.exit(1)
 
     # Sync the script with Github version
@@ -109,16 +119,27 @@ def main():
             sys.exit(1)
 
     # Update and upgrade apt packages
-    print_message("blue", "General Update")
-    update_packages()
+    if not dry_run:
+        print_message("blue", "General Update")
+        update_packages()
 
     # Install or remove specified apt packages
     print_message("blue", "Checking installed packages")
     apt_cache = apt.Cache()
     for package in packages_to_install:
-        install_package(package, apt_cache)
+        if not apt_cache[package].is_installed:
+            print_message(
+                "green", ("Would install " if dry_run else "Installing ") + package
+            )
+        if not dry_run:
+            install_package(package, apt_cache)
     for package in packages_to_remove:
-        remove_package(package, apt_cache)
+        if apt_cache[package].is_installed:
+            print_message(
+                "red", ("Would remove " if dry_run else "Removing ") + package
+            )
+        if not dry_run:
+            remove_package(package, apt_cache)
 
     # Install python modules
     print_message("blue", "Checking python modules")
@@ -128,56 +149,95 @@ def main():
             [sys.executable, "-m", "pip", "freeze"]
         ).split()
     ]
-    pip_package_install(pip_packages, installed_pip_packages)
-    if args.pip or args.full:
-        update_pip_packages()
+    if dry_run:
+        for package in pip_packages:
+            if package not in installed_pip_packages:
+                print_message("green", "Would install pip package " + package)
+    else:
+        pip_package_install(pip_packages, installed_pip_packages)
+        if args.pip or args.full:
+            update_pip_packages()
 
     # Install gem packages
     if not os.path.exists("/usr/bin/gem"):
         print_message("error", "Rubygems not installed, skipping gem checks")
     else:
         print_message("blue", "Checking ruby gems")
-        gemlist = subprocess.Popen(
-            ["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE
-        ).stdout
-        installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
-        gem_package_install(gem_packages, installed_gem_packages)
-        if args.gems or args.full:
-            update_gems()
+        result = subprocess.run(["gem", "list"], capture_output=True, text=True)
+        installed_gem_packages = [
+            line.split()[0] for line in result.stdout.splitlines() if line.strip()
+        ]
+        if dry_run:
+            for package in gem_packages:
+                if package not in installed_gem_packages:
+                    print_message("green", "Would install gem package " + package)
+        else:
+            gem_package_install(gem_packages, installed_gem_packages)
+            if args.gems or args.full:
+                update_gems()
 
     # Take ownership of the external tools directory
-    take_ownership(external_tools_directory)
+    if not dry_run:
+        take_ownership(external_tools_directory)
 
     # Install golang tools
     if not os.path.exists("/usr/bin/go"):
         print_message("error", "Golang not installed, skipping go module checks")
     else:
         print_message("blue", "Checking golang modules")
-        if not args.rebuildgo:
+        if dry_run:
             for module in golang_modules_to_install:
-                install_golang_module(module, golang_install_directory)
-        if args.rebuildgo or args.full:
-            update_go_packages(golang_modules_to_install, golang_install_directory)
+                modulename = module.split("/")[-1].lower()
+                gopath = golang_install_directory + "/" + modulename
+                if not os.path.exists(gopath):
+                    print_message("green", "Would install go module " + modulename)
+        else:
+            if not args.rebuildgo:
+                for module in golang_modules_to_install:
+                    install_golang_module(module, golang_install_directory)
+            if args.rebuildgo or args.full:
+                update_go_packages(golang_modules_to_install, golang_install_directory)
 
     # Create and remove specified directories
     print_message("blue", "Checking directory structure")
-    create_directory(personal_repo_directory)
-    create_directory(external_tools_directory)
-    for directory in directories_to_remove:
-        remove_directory(directory)
+    if dry_run:
+        if not os.path.exists(personal_repo_directory):
+            print_message("green", "Would create directory: " + personal_repo_directory)
+        if not os.path.exists(external_tools_directory):
+            print_message(
+                "green", "Would create directory: " + external_tools_directory
+            )
+        for directory in directories_to_remove:
+            full_path = os.getenv("HOME") + "/" + directory
+            if os.path.exists(full_path):
+                print_message("red", "Would remove directory: " + full_path)
+    else:
+        create_directory(personal_repo_directory)
+        create_directory(external_tools_directory)
+        for directory in directories_to_remove:
+            remove_directory(directory)
 
     # Sync git repositories
     if not args.noreposync:
         print_message("blue", "Syncing git repositories")
-        for repo in personal_repositories_to_sync:
-            sync_git_repo(repo, personal_repo_directory)
-        for repo in ext_repositories_to_sync:
-            sync_git_repo(repo, external_tools_directory)
+        if dry_run:
+            for repo in personal_repositories_to_sync:
+                print_message("green", "Would sync " + repo.split("/")[-1])
+            for repo in ext_repositories_to_sync:
+                print_message("green", "Would sync " + repo.split("/")[-1])
+        else:
+            for repo in personal_repositories_to_sync:
+                sync_git_repo(repo, personal_repo_directory)
+            for repo in ext_repositories_to_sync:
+                sync_git_repo(repo, external_tools_directory)
 
     # Run *.sh and *.py files in the /scripts directory
     if not args.noscripts:
-        print_message("blue", "Running scripts")
-        run_scripts()
+        if dry_run:
+            print_message("blue", "Would run scripts from scripts/ directory")
+        else:
+            print_message("blue", "Running scripts")
+            run_scripts()
 
     print("\nAll done. Go break stuff.\n")
 

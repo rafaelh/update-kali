@@ -31,7 +31,9 @@ then
     cd /opt/cloud_enum
     git remote update 1>/dev/null
     HEADHASH=$(git rev-parse HEAD)
-    UPSTREAMHASH=$(git rev-parse master@{upstream})
+    DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    DEFAULT_BRANCH=${DEFAULT_BRANCH:-master}
+    UPSTREAMHASH=$(git rev-parse "${DEFAULT_BRANCH}@{upstream}")
     if [ "$HEADHASH" != "$UPSTREAMHASH" ]; then
         # Actions to perform if there are remote updates
         echo -ne $GREEN"[+] "$ENDCOLOR; echo "Updating cloud_enum"
