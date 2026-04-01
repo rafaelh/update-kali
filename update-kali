@@ -1,45 +1,109 @@
 #!/usr/bin/env python3
-''' This script updates apt, go, pip and ruby packages. Run with --help for more information '''
+"""This script updates apt, go, pip and ruby packages. Run with --help for more information"""
 
+import argparse
 import os
-import apt
 import subprocess
 import sys
-import argparse
-from updateactions import (print_message, elevate_privileges, take_ownership, update_packages,
-                           install_package, remove_package, pip_package_install,gem_package_install,
-                           install_golang_module, create_directory, remove_directory, sync_git_repo,
-                           run_scripts, update_pip_packages, update_gems, update_go_packages)
-from config import (personal_repo_directory, external_tools_directory, directories_to_remove,
-                    packages_to_install, packages_to_remove, pip_packages, gem_packages,
-                    golang_modules_to_install, ext_repositories_to_sync,
-                    personal_repositories_to_sync, golang_install_directory)
+
+import apt
+
+from config import (
+    directories_to_remove,
+    ext_repositories_to_sync,
+    external_tools_directory,
+    gem_packages,
+    golang_install_directory,
+    golang_modules_to_install,
+    packages_to_install,
+    packages_to_remove,
+    personal_repo_directory,
+    personal_repositories_to_sync,
+    pip_packages,
+)
+from updateactions import (
+    create_directory,
+    elevate_privileges,
+    gem_package_install,
+    install_golang_module,
+    install_package,
+    pip_package_install,
+    print_message,
+    remove_directory,
+    remove_package,
+    run_scripts,
+    sync_git_repo,
+    take_ownership,
+    update_gems,
+    update_go_packages,
+    update_packages,
+    update_pip_packages,
+)
+
 
 def main():
-    argument_parser = argparse.ArgumentParser(description="update-kali is a tool for rapidly configuring Kali linux " +
-                                             "with additional packages, git repositories and other tools, and " +
-                                             "maintaining them over time.")
-    argument_parser.add_argument("-n", "--noupdate", help="Don't check for an updated script", action="store_true")
-    argument_parser.add_argument("-s", "--noscripts", help="Don't run scripts", action="store_true")
-    argument_parser.add_argument("-r", "--noreposync", help="Don't sync git repos", action="store_true")
-    argument_parser.add_argument("-p", "--pip", help="Update all installed python pip packages", action="store_true")
-    argument_parser.add_argument("-g", "--gems", help="Update all installed ruby gem packages", action="store_true")
-    argument_parser.add_argument("-G", "--rebuildgo", help="Rebuild Go packages", action="store_true")
-    argument_parser.add_argument("-f", "--full", help="Do all optional updates", action="store_true")
+    argument_parser = argparse.ArgumentParser(
+        description="update-kali is a tool for rapidly configuring Kali linux "
+        + "with additional packages, git repositories and other tools, and "
+        + "maintaining them over time."
+    )
+    argument_parser.add_argument(
+        "-n",
+        "--noupdate",
+        help="Don't check for an updated script",
+        action="store_true",
+    )
+    argument_parser.add_argument(
+        "-s", "--noscripts", help="Don't run scripts", action="store_true"
+    )
+    argument_parser.add_argument(
+        "-r", "--noreposync", help="Don't sync git repos", action="store_true"
+    )
+    argument_parser.add_argument(
+        "-p",
+        "--pip",
+        help="Update all installed python pip packages",
+        action="store_true",
+    )
+    argument_parser.add_argument(
+        "-g",
+        "--gems",
+        help="Update all installed ruby gem packages",
+        action="store_true",
+    )
+    argument_parser.add_argument(
+        "-G", "--rebuildgo", help="Rebuild Go packages", action="store_true"
+    )
+    argument_parser.add_argument(
+        "-f", "--full", help="Do all optional updates", action="store_true"
+    )
     args = argument_parser.parse_args()
 
     # Run checks
-    if not os.getenv("GOROOT"): print_message("error", "GOROOT not set. Add 'export GOROOT=/usr/lib/go' to your .bashrc")
-    if not os.getenv("GOPATH"): print_message("error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc")
-    if elevate_privileges(): sys.exit(1)
+    if not os.getenv("GOROOT"):
+        print_message(
+            "error", "GOROOT not set. Add 'export GOROOT=/usr/lib/go' to your .bashrc"
+        )
+    if not os.getenv("GOPATH"):
+        print_message(
+            "error", "GOPATH not set. Add 'export GOPATH=$HOME/go' to your .bashrc"
+        )
+    if elevate_privileges():
+        sys.exit(1)
 
     # Sync the script with Github version
     if not args.noupdate:
         print_message("blue", "Syncing 'update-kali' script")
         script_dir = os.path.dirname(os.path.realpath(__file__))
-        old_head = subprocess.check_output(["git", "-C", script_dir, "rev-parse", "HEAD"]).strip()
-        subprocess.run(["git", "-C", script_dir, "pull", "origin", "main"], stdout=subprocess.PIPE)
-        new_head = subprocess.check_output(["git", "-C", script_dir, "rev-parse", "HEAD"]).strip()
+        old_head = subprocess.check_output(
+            ["git", "-C", script_dir, "rev-parse", "HEAD"]
+        ).strip()
+        subprocess.run(
+            ["git", "-C", script_dir, "pull", "origin", "main"], stdout=subprocess.PIPE
+        )
+        new_head = subprocess.check_output(
+            ["git", "-C", script_dir, "rev-parse", "HEAD"]
+        ).strip()
         if old_head != new_head:
             print_message("error", "Script Updated. Please run the new version.\n")
             sys.exit(1)
@@ -58,26 +122,34 @@ def main():
 
     # Install python modules
     print_message("blue", "Checking python modules")
-    installed_pip_packages = [r.decode().split('==')[0] for r in \
-        subprocess.check_output([sys.executable, '-m', 'pip', 'freeze']).split()]
+    installed_pip_packages = [
+        r.decode().split("==")[0]
+        for r in subprocess.check_output(
+            [sys.executable, "-m", "pip", "freeze"]
+        ).split()
+    ]
     pip_package_install(pip_packages, installed_pip_packages)
-    if args.pip or args.full: update_pip_packages()
+    if args.pip or args.full:
+        update_pip_packages()
 
     # Install gem packages
-    if not os.path.exists('/usr/bin/gem'):
+    if not os.path.exists("/usr/bin/gem"):
         print_message("error", "Rubygems not installed, skipping gem checks")
     else:
         print_message("blue", "Checking ruby gems")
-        gemlist = subprocess.Popen(["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE).stdout
+        gemlist = subprocess.Popen(
+            ["gem list | awk '{ print $1 }'"], shell=True, stdout=subprocess.PIPE
+        ).stdout
         installed_gem_packages = gemlist.read().decode("utf-8").split("\n")
         gem_package_install(gem_packages, installed_gem_packages)
-        if args.gems or args.full: update_gems()
+        if args.gems or args.full:
+            update_gems()
 
     # Take ownership of the external tools directory
     take_ownership(external_tools_directory)
 
     # Install golang tools
-    if not os.path.exists('/usr/bin/go'):
+    if not os.path.exists("/usr/bin/go"):
         print_message("error", "Golang not installed, skipping go module checks")
     else:
         print_message("blue", "Checking golang modules")
@@ -110,5 +182,5 @@ def main():
     print("\nAll done. Go break stuff.\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
